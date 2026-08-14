@@ -3,7 +3,22 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Check, MapPin, ShieldCheck, Sparkles } from 'lucide-react';
 
-export default function PremiumHero() {
+interface PremiumHeroProps {
+  lang: 'es' | 'ca' | 'fr';
+  t: {
+    badge: string;
+    title1: string;
+    title2: string;
+    subtitle: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
+    stat1: string;
+    stat2: string;
+    stat3: string;
+  };
+}
+
+export default function PremiumHero({ lang, t }: PremiumHeroProps) {
   return (
     <section id="home" className="relative overflow-hidden bg-[#f4f7fb] pt-28 pb-18">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(252,209,22,0.18),transparent_24%),radial-gradient(circle_at_bottom_right,_rgba(0,46,125,0.12),transparent_30%)]" />
@@ -20,18 +35,18 @@ export default function PremiumHero() {
             className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white/90 px-4 py-2 text-sm font-medium text-blue-700 shadow-sm"
           >
             <Sparkles size={16} className="text-yellow-500" />
-            Limpieza premium en Andorra
+            {t.badge}
           </motion.div>
 
           <div className="space-y-5">
             <h1 className="text-4xl font-black tracking-[-0.06em] text-slate-900 sm:text-5xl lg:text-7xl">
-              Deja tu espacio
+              {t.title1}
               <span className="block bg-gradient-to-r from-[#FCD116] via-[#002E7D] to-[#CE1126] bg-clip-text text-transparent">
-                impecable.
+                {t.title2}
               </span>
             </h1>
             <p className="max-w-xl text-lg leading-8 text-slate-600">
-              Limpieza profesional para oficinas, viviendas, hoteles, comercios y espacios corporativos con estándares de calidad y atención cercana.
+              {t.subtitle}
             </p>
           </div>
 
@@ -39,23 +54,33 @@ export default function PremiumHero() {
             <motion.a
               href="https://wa.me/593999999999"
               target="_blank"
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#FCD116] to-[#f5b700] px-6 py-3.5 font-semibold text-slate-900 shadow-lg shadow-yellow-200"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#FCD116] to-[#f5b700] px-6 py-3.5 font-semibold text-slate-900 shadow-[0_18px_35px_rgba(252,209,22,0.35)] transition-all"
             >
-              Solicitar presupuesto
+              {t.ctaPrimary}
               <ArrowRight size={18} />
             </motion.a>
-            <a href="#services" className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3.5 font-semibold text-slate-800">
-              Ver servicios
-            </a>
+            <motion.a
+              href="#services"
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3.5 font-semibold text-slate-800 shadow-sm"
+            >
+              {t.ctaSecondary}
+            </motion.a>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600">
-            <div className="flex items-center gap-2"><Check size={16} className="text-emerald-500" /> Personal capacitado</div>
-            <div className="flex items-center gap-2"><ShieldCheck size={16} className="text-emerald-500" /> Supervisión constante</div>
-            <div className="flex items-center gap-2"><MapPin size={16} className="text-emerald-500" /> Andorra · Europa</div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.7 }}
+            className="flex flex-wrap items-center gap-4 text-sm text-slate-600"
+          >
+            <div className="flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-2"><Check size={16} className="text-emerald-500" /> {t.stat1}</div>
+            <div className="flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-2"><ShieldCheck size={16} className="text-emerald-500" /> {t.stat2}</div>
+            <div className="flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-2"><MapPin size={16} className="text-emerald-500" /> {t.stat3}</div>
+          </motion.div>
         </motion.div>
 
         <motion.div

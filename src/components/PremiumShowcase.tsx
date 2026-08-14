@@ -41,11 +41,12 @@ export default function PremiumShowcase() {
           {gallery.map((item, index) => (
             <motion.div
               key={item.title}
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 18, scale: 0.96 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.08 }}
-              className="group relative overflow-hidden rounded-[1.6rem]"
+              transition={{ delay: index * 0.08, duration: 0.5 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="group relative overflow-hidden rounded-[1.6rem] shadow-[0_18px_45px_rgba(15,23,42,0.07)]"
             >
               <img src={item.image} alt={item.title} className="h-80 w-full object-cover transition duration-500 group-hover:scale-110" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/10 to-transparent" />

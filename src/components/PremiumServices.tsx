@@ -3,6 +3,14 @@
 import { motion } from 'framer-motion';
 import { Building2, Castle, Home, Sparkles, Truck, Wrench } from 'lucide-react';
 
+interface PremiumServicesProps {
+  lang: 'es' | 'ca' | 'fr';
+  t: {
+    eyebrow: string;
+    title: string;
+  };
+}
+
 const services = [
   {
     title: 'Limpieza corporativa',
@@ -48,7 +56,7 @@ const services = [
   },
 ];
 
-export default function PremiumServices() {
+export default function PremiumServices({ t }: PremiumServicesProps) {
   return (
     <section id="services" className="bg-white py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -58,9 +66,9 @@ export default function PremiumServices() {
           viewport={{ once: true }}
           className="mb-14 text-center"
         >
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-[#002E7D]">Servicios</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-[#002E7D]">{t.eyebrow}</p>
           <h2 className="mt-4 text-4xl font-black tracking-[-0.06em] text-slate-900 md:text-5xl">
-            Soluciones de limpieza pensadas para cada tipo de espacio
+            {t.title}
           </h2>
         </motion.div>
 

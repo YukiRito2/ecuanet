@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, X, Send, Smile } from 'lucide-react';
+import { MessageCircle, X, Send, Smile, MessageSquareText, Phone } from 'lucide-react';
 
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,16 +60,31 @@ export default function ChatBot() {
 
   return (
     <>
-      <motion.button
-        onClick={() => setIsOpen(!isOpen)}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        className="fixed bottom-6 right-6 w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-500 text-gray-900 flex items-center justify-center shadow-2xl z-40 hover:shadow-xl transition-shadow"
-      >
-        <AnimatePresence>
-          {!isOpen && <MessageCircle size={28} />}
-        </AnimatePresence>
-      </motion.button>
+      <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
+        <motion.a
+          href="https://wa.me/593999999999"
+          target="_blank"
+          rel="noreferrer"
+          whileHover={{ scale: 1.06 }}
+          whileTap={{ scale: 0.96 }}
+          className="flex h-16 w-16 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_18px_40px_rgba(37,211,102,0.45)]"
+          aria-label="WhatsApp"
+        >
+          <Phone size={28} />
+        </motion.a>
+
+        <motion.button
+          onClick={() => setIsOpen(!isOpen)}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-yellow-400 to-yellow-500 text-gray-900 shadow-[0_18px_40px_rgba(251,191,36,0.45)]"
+          aria-label="Abrir chat"
+        >
+          <AnimatePresence>
+            {!isOpen && <MessageSquareText size={28} />}
+          </AnimatePresence>
+        </motion.button>
+      </div>
 
       <AnimatePresence>
         {isOpen && (
