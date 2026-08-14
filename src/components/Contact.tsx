@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
+import { Phone, MapPin, ArrowRight } from 'lucide-react';
 
 interface ContactProps {
   lang: 'es' | 'ca' | 'fr';
@@ -8,8 +8,6 @@ interface ContactProps {
     subtitle: string;
     whatsapp: string;
     whatsappSub: string;
-    email: string;
-    emailSub: string;
     location: string;
     locationSub: string;
     cta: string;
@@ -49,18 +47,6 @@ export default function Contact({ t }: ContactProps) {
                 <div>
                   <p className="font-semibold text-slate-900">{t.whatsapp}</p>
                   <p className="text-sm text-slate-500">{t.whatsappSub}</p>
-                </div>
-              </motion.a>
-
-              <motion.a
-                href="mailto:contacto@ecuanet.com"
-                whileHover={{ x: 4 }}
-                className="flex items-center gap-3 rounded-2xl border border-slate-200 p-4 transition-colors hover:border-[#002E7D] hover:bg-blue-50/60"
-              >
-                <Mail className="text-[#002E7D]" size={24} />
-                <div>
-                  <p className="font-semibold text-slate-900">{t.email}</p>
-                  <p className="text-sm text-slate-500">{t.emailSub}</p>
                 </div>
               </motion.a>
 
