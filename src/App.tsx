@@ -16,7 +16,13 @@ export type Lang = 'es' | 'ca' | 'fr';
 
 export const translations = {
   es: {
-    nav: { home: 'Inicio', services: 'Servicios', works: 'Trabajos', differences: 'Diferencias', contact: 'Contacto' },
+    nav: {
+      home: 'Inicio',
+      services: 'Servicios',
+      works: 'Trabajos',
+      differences: 'Diferencias',
+      contact: 'Contacto',
+    },
     hero: {
       badge: 'Limpieza premium en Andorra',
       title1: 'Deja tu espacio',
@@ -55,7 +61,13 @@ export const translations = {
     },
   },
   ca: {
-    nav: { home: 'Inici', services: 'Serveis', works: 'Treballs', differences: 'Diferències', contact: 'Contacte' },
+    nav: {
+      home: 'Inici',
+      services: 'Serveis',
+      works: 'Treballs',
+      differences: 'Diferències',
+      contact: 'Contacte',
+    },
     hero: {
       badge: 'Neteja premium a Andorra',
       title1: 'Deixa el teu espai',
@@ -94,7 +106,13 @@ export const translations = {
     },
   },
   fr: {
-    nav: { home: 'Accueil', services: 'Services', works: 'Projets', differences: 'Différences', contact: 'Contact' },
+    nav: {
+      home: 'Accueil',
+      services: 'Services',
+      works: 'Projets',
+      differences: 'Différences',
+      contact: 'Contact',
+    },
     hero: {
       badge: 'Nettoyage premium en Andorre',
       title1: 'Laissez votre espace',
@@ -140,7 +158,7 @@ export default function App() {
 
   return (
     <main className="bg-white text-slate-900">
-      <Navbar lang={lang} setLang={setLang} t={t} />
+      <Navbar lang={lang} setLang={setLang} t={t.nav} />
       <div className="bg-white">
         <PremiumHero lang={lang} t={t.hero} />
       </div>
