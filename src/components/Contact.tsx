@@ -53,7 +53,7 @@ export default function Contact({ t }: ContactProps) {
               </motion.a>
 
               <motion.a
-                href="mailto:contacto@limpiezasecuador.com"
+                href="mailto:contacto@ecuanet.com"
                 whileHover={{ x: 4 }}
                 className="flex items-center gap-3 rounded-2xl border border-slate-200 p-4 transition-colors hover:border-[#002E7D] hover:bg-blue-50/60"
               >

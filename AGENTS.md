@@ -1,4 +1,4 @@
-# Limpiezas Ecuador — guía del proyecto
+# Ecuanet — guía del proyecto
 
 Landing page en **React 19 + Vite + TypeScript + Tailwind CSS 4**. No usa Next.js: no hay carpeta `app/`, no hay SSR, no hay `next.config`.
 
@@ -13,4 +13,5 @@ Landing page en **React 19 + Vite + TypeScript + Tailwind CSS 4**. No usa Next.j
 
 - `src/App.tsx` — componente raíz, ensambla las secciones de la página
 - `src/translations.ts` — textos en ES/CA/FR y el tipo `Lang`
-- `src/components/` — una sección por archivo (Navbar, PremiumHero, PremiumServices, PremiumShowcase, ResultsSection, PriceValue, Differentiators, Process, Testimonials, Contact, ChatBot, Footer)
+- `src/assets/` — logo y otros recursos estáticos importados desde componentes
+- `src/components/` — una sección por archivo (Navbar, PremiumHero, PremiumServices, PremiumShowcase, ResultsSection, PriceValue, Differentiators, Process, Testimonials, Contact, Quoter, Footer)

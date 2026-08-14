@@ -1,4 +1,4 @@
-# 🚀 Deployment Guide - Limpiezas Ecuador
+# 🚀 Deployment Guide - Ecuanet
 
 ## GitHub Setup (1 minuto)
 

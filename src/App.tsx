@@ -6,10 +6,9 @@ import PremiumShowcase from './components/PremiumShowcase';
 import ResultsSection from './components/ResultsSection';
 import PriceValue from './components/PriceValue';
 import Process from './components/Process';
-import Differentiators from './components/Differentiators';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
-import ChatBot from './components/ChatBot';
+import Quoter from './components/Quoter';
 import Footer from './components/Footer';
 import { translations, type Lang } from './translations';
 
@@ -35,9 +34,6 @@ export default function App() {
       <div className="border-t border-slate-100 bg-gradient-to-b from-slate-50 to-white">
         <PriceValue lang={lang} />
       </div>
-      <div className="border-t border-slate-100 bg-white">
-        <Differentiators />
-      </div>
       <div className="border-t border-slate-100 bg-slate-50">
         <Process />
       </div>
@@ -47,7 +43,7 @@ export default function App() {
       <div className="border-t border-slate-100 bg-white">
         <Contact lang={lang} t={t.contact} />
       </div>
-      <ChatBot />
+      <Quoter />
       <Footer />
     </main>
   );

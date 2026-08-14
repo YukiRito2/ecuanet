@@ -6,7 +6,6 @@ export const translations = {
       home: 'Inicio',
       services: 'Servicios',
       works: 'Trabajos',
-      differences: 'Diferencias',
       contact: 'Contacto',
     },
     hero: {
@@ -51,7 +50,6 @@ export const translations = {
       home: 'Inici',
       services: 'Serveis',
       works: 'Treballs',
-      differences: 'Diferències',
       contact: 'Contacte',
     },
     hero: {
@@ -96,7 +94,6 @@ export const translations = {
       home: 'Accueil',
       services: 'Services',
       works: 'Projets',
-      differences: 'Différences',
       contact: 'Contact',
     },
     hero: {

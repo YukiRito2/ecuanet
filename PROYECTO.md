@@ -1,4 +1,4 @@
-# Limpiezas Ecuador - Sitio Web Profesional
+# Ecuanet - Sitio Web Profesional
 
 ## ✅ Proyecto Completado
 
@@ -16,21 +16,19 @@ Tu sitio web profesional de limpieza está listo en **http://localhost:3000**
 - **Navbar**: Navegación fija con logo y CTA
 - **Hero**: Impacto visual con CTA principal
 - **Servicios**: 6 tipos de servicios (Corporativo, Residencial, Industrial, etc.)
-- **Diferenciadores**: 4 razones por qué elegir tu empresa
 - **Proceso**: 4 pasos del flujo de trabajo
 - **Testimonios**: Social proof con valoraciones
 - **Contacto**: CTA con opciones de contacto
 - **Footer**: Información completa y redes sociales
 
-#### 3. **ChatBot Amigable** 💬
-- Widget flotante con Leo, el asistente
-- Respuestas automáticas contextuales
-- Botones de respuesta rápida
-- Diseño amigable y interactivo
+#### 3. **Calculadora de presupuesto** 🧮
+- Widget flotante con precio estimado en vivo
+- Flujo guiado paso a paso (tipo de espacio, horas, ubicación, extras)
+- Envío del resumen directo por WhatsApp
 
 #### 4. **Integración Social**
 - ✅ Botón WhatsApp (llamada a acción)
-- ✅ Links TikTok, Instagram, Facebook, LinkedIn
+- ✅ Links TikTok y email en el footer
 - ✅ Email y ubicación en contacto
 - ✅ Presencia en redes integrada
 
@@ -68,12 +66,12 @@ limpiezas-ecuador/
 │   │   ├── PremiumShowcase.tsx  (Galería de trabajos)
 │   │   ├── ResultsSection.tsx   (Antes y después)
 │   │   ├── PriceValue.tsx       (Planes y precios)
-│   │   ├── Differentiators.tsx  (Diferenciadores)
 │   │   ├── Process.tsx          (Pasos del proceso)
 │   │   ├── Testimonials.tsx     (Testimonios con rating)
 │   │   ├── Contact.tsx          (Formulario y CTA)
-│   │   ├── ChatBot.tsx          (Asistente Leo)
+│   │   ├── Quoter.tsx           (Calculadora de presupuesto)
 │   │   └── Footer.tsx           (Pie de página)
+│   ├── assets/                  (Logo y recursos estáticos)
 │   ├── App.tsx                  (Componente raíz)
 │   ├── translations.ts          (Textos ES/CA/FR)
 │   ├── main.tsx                 (Entry point)
@@ -146,12 +144,11 @@ npm run lint
 
 Para cambiar información:
 
-1. **Números/Stats**: Editar en `Hero.tsx`
-2. **Servicios**: Añadir/modificar array en `Services.tsx`
-3. **Diferenciadores**: Actualizar en `Differentiators.tsx`
-4. **Contacto**: Cambiar números en `Navbar.tsx`, `Contact.tsx`, `Footer.tsx`
-5. **Testimonios**: Editar array en `Testimonials.tsx`
-6. **ChatBot**: Personalizar respuestas en `ChatBot.tsx`
+1. **Textos**: Editar `src/translations.ts`
+2. **Servicios**: Añadir/modificar array en `PremiumServices.tsx`
+3. **Contacto**: Cambiar números en `Navbar.tsx`, `Contact.tsx`, `Footer.tsx`, `Quoter.tsx`
+4. **Testimonios**: Editar array en `Testimonials.tsx`
+5. **Precios de la calculadora**: Ajustar constantes al inicio de `Quoter.tsx`
 
 ---
 
@@ -159,7 +156,7 @@ Para cambiar información:
 
 Actualmente configurado con números de ejemplo. Reemplazar:
 - WhatsApp: `https://wa.me/593999999999`
-- Email: `contacto@limpiezasecuador.com`
+- Email: `contacto@ecuanet.com`
 - TikTok: `https://tiktok.com/@limpieecu`
 - Ubicación: `Andorra, La Vella`
 
@@ -171,7 +168,7 @@ Actualmente configurado con números de ejemplo. Reemplazar:
 - ✅ Stagger animations en listas
 - ✅ Hover effects en botones
 - ✅ Floating animation en hero
-- ✅ Scale animations en chatbot
+- ✅ Scale animations en la calculadora de presupuesto
 - ✅ Slide animations en navbar
 - ✅ Gradient text animations
 
@@ -191,10 +188,8 @@ Actualmente configurado con números de ejemplo. Reemplazar:
 
 ## 📊 Estadísticas del Proyecto
 
-- **Componentes**: 9 (Navbar, Hero, Services, Differentiators, Process, Testimonials, Contact, ChatBot, Footer)
-- **Líneas de código**: ~1500+
-- **Animaciones**: 20+
-- **Secciones**: 9
+- **Componentes**: 11 (Navbar, PremiumHero, PremiumServices, PremiumShowcase, ResultsSection, PriceValue, Process, Testimonials, Contact, Quoter, Footer)
+- **Animaciones**: Framer Motion en todas las secciones
 - **Time to Interactive**: <3 segundos
 - **Lighthouse Score**: 95+
 

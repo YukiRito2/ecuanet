@@ -1,4 +1,4 @@
-# 🧹 Limpiezas Ecuador - Landing Page Premium
+# 🧹 Ecuanet - Landing Page Premium
 
 Landing page profesional para empresa de servicios de limpieza en Andorra, con diseño premium, animaciones suaves y soporte multilingual (Español, Catalán, Francés).
 
@@ -107,7 +107,7 @@ vercel
 3. **Contacto**: `src/components/Contact.tsx` (cambiar WhatsApp number)
 
 ### Traducir Contenido
-Todos los textos en `src/App.tsx` en objeto `translations`:
+Todos los textos en `src/translations.ts` en objeto `translations`:
 ```typescript
 export const translations = {
   es: { ... },
@@ -123,7 +123,6 @@ export const translations = {
 | Inicio | `#home` |
 | Servicios | `#services` |
 | Trabajos | `#works` |
-| Diferencias | `#differentiators` |
 | Contacto | `#contact` |
 
 ## ✅ Status

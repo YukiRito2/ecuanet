@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import type { Lang } from '../translations';
+import logo from '../assets/ecuanet-logo.png';
 
 interface NavbarProps {
   lang: Lang;
@@ -10,7 +11,6 @@ interface NavbarProps {
     home: string;
     services: string;
     works: string;
-    differences: string;
     contact: string;
   };
 }
@@ -23,7 +23,6 @@ export default function Navbar({ lang, setLang, t }: NavbarProps) {
     { name: t.home, href: '#home' },
     { name: t.services, href: '#services' },
     { name: t.works, href: '#works' },
-    { name: t.differences, href: '#differentiators' },
     { name: t.contact, href: '#contact' },
   ];
 
@@ -37,15 +36,10 @@ export default function Navbar({ lang, setLang, t }: NavbarProps) {
     <nav className="fixed top-0 z-50 w-full border-b border-slate-200/80 bg-white/80 backdrop-blur-xl">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-yellow-400 via-blue-600 to-red-600">
-              <span className="text-sm font-bold text-white">LC</span>
-            </div>
-            <div>
-              <p className="text-sm font-bold text-slate-900">Limpiezas</p>
-              <p className="text-xs font-semibold text-[#002E7D]">Ecuador</p>
-            </div>
-          </motion.div>
+          <motion.a href="#home" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-2">
+            <img src={logo} alt="Ecuanet" className="h-11 w-11 object-contain" />
+            <span className="text-lg font-bold tracking-[-0.02em] text-slate-900">Ecuanet</span>
+          </motion.a>
 
           <div className="hidden items-center gap-8 md:flex">
             {navItems.map((item, i) => (
