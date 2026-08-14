@@ -1,5 +1,3 @@
-'use client';
-
 import { motion } from 'framer-motion';
 import { TrendingDown, Award, Zap, DollarSign } from 'lucide-react';
 

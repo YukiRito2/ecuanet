@@ -1,9 +1,7 @@
-'use client';
-
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown, Menu, X } from 'lucide-react';
-import type { Lang } from '../App';
+import type { Lang } from '../translations';
 
 interface NavbarProps {
   lang: Lang;
@@ -44,8 +42,8 @@ export default function Navbar({ lang, setLang, t }: NavbarProps) {
               <span className="text-sm font-bold text-white">LC</span>
             </div>
             <div>
-              <p className="text-sm font-bold text-gray-900">Limpiezas</p>
-              <p className="text-xs font-semibold text-blue-600">Ecuador</p>
+              <p className="text-sm font-bold text-slate-900">Limpiezas</p>
+              <p className="text-xs font-semibold text-[#002E7D]">Ecuador</p>
             </div>
           </motion.div>
 
@@ -57,7 +55,7 @@ export default function Navbar({ lang, setLang, t }: NavbarProps) {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className="text-sm font-medium text-gray-700 transition-colors hover:text-blue-600"
+                className="text-sm font-medium text-slate-700 transition-colors hover:text-[#002E7D]"
               >
                 {item.name}
               </motion.a>
@@ -147,7 +145,7 @@ export default function Navbar({ lang, setLang, t }: NavbarProps) {
         >
           <div className="space-y-4 px-4 py-4">
             {navItems.map((item) => (
-              <a key={item.name} href={item.href} onClick={() => setIsOpen(false)} className="block font-medium text-gray-700 hover:text-blue-600">
+              <a key={item.name} href={item.href} onClick={() => setIsOpen(false)} className="block font-medium text-slate-700 hover:text-[#002E7D]">
                 {item.name}
               </a>
             ))}

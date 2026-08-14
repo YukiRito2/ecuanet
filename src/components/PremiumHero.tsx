@@ -1,5 +1,3 @@
-'use client';
-
 import { motion } from 'framer-motion';
 import { ArrowRight, Check, MapPin, ShieldCheck, Sparkles } from 'lucide-react';
 
@@ -18,7 +16,7 @@ interface PremiumHeroProps {
   };
 }
 
-export default function PremiumHero({ lang, t }: PremiumHeroProps) {
+export default function PremiumHero({ t }: PremiumHeroProps) {
   return (
     <section id="home" className="relative overflow-hidden bg-[#f4f7fb] pt-28 pb-18">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(252,209,22,0.18),transparent_24%),radial-gradient(circle_at_bottom_right,_rgba(0,46,125,0.12),transparent_30%)]" />

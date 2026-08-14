@@ -1,5 +1,3 @@
-'use client';
-
 import { motion } from 'framer-motion';
 import { ArrowRight, Camera, PlayCircle, Sparkles } from 'lucide-react';
 

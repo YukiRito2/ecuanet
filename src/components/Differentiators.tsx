@@ -1,51 +1,49 @@
-'use client';
-
 import { motion } from 'framer-motion';
 import { Gauge, Zap, CheckCircle2, HeartHandshake } from 'lucide-react';
 
-export default function Differentiators() {
-  const items = [
-    {
-      number: '01',
-      title: 'Uso de métricas por m²',
-      description: 'Cotizaciones transparentes basadas en superficie y necesidad real del espacio.',
-      icon: Gauge,
-      align: 'left',
-    },
-    {
-      number: '02',
-      title: 'Trazabilidad del servicio',
-      description: 'Supervisión clara del cumplimiento, frecuencia y estándares de cada limpieza.',
-      icon: Zap,
-      align: 'right',
-    },
-    {
-      number: '03',
-      title: 'Mecanización y cuidado',
-      description: 'Combinamos equipos profesionales con procedimientos que protegen cada superficie.',
-      icon: CheckCircle2,
-      align: 'left',
-    },
-    {
-      number: '04',
-      title: 'Operadores valorados',
-      description: 'Trabajamos con personal preparado, respetado y enfocado en resultados sostenibles.',
-      icon: HeartHandshake,
-      align: 'right',
-    },
-  ];
+const items = [
+  {
+    title: 'Uso de métricas por m²',
+    description: 'Cotizaciones transparentes basadas en superficie y necesidad real del espacio.',
+    icon: Gauge,
+    align: 'left',
+  },
+  {
+    title: 'Trazabilidad del servicio',
+    description: 'Supervisión clara del cumplimiento, frecuencia y estándares de cada limpieza.',
+    icon: Zap,
+    align: 'right',
+  },
+  {
+    title: 'Mecanización y cuidado',
+    description: 'Combinamos equipos profesionales con procedimientos que protegen cada superficie.',
+    icon: CheckCircle2,
+    align: 'left',
+  },
+  {
+    title: 'Operadores valorados',
+    description: 'Trabajamos con personal preparado, respetado y enfocado en resultados sostenibles.',
+    icon: HeartHandshake,
+    align: 'right',
+  },
+] as const;
 
+export default function Differentiators() {
   return (
-    <section id="differentiators" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
-      <div className="max-w-6xl mx-auto">
+    <section id="differentiators" className="bg-slate-50 py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-16 text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">¿Por qué elegirnos?</h2>
-          <p className="text-xl text-gray-600">Calidad que se nota desde el primer día</p>
+          <h2 className="text-4xl font-black tracking-[-0.06em] text-slate-900 md:text-5xl">
+            ¿Por qué elegirnos?
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-600">
+            Calidad que se nota desde el primer día
+          </p>
         </motion.div>
 
         <div className="space-y-8">
@@ -53,28 +51,28 @@ export default function Differentiators() {
             const Icon = item.icon;
             return (
               <motion.div
-                key={item.number}
-                initial={{ opacity: 0, x: item.align === 'left' ? -50 : 50 }}
+                key={item.title}
+                initial={{ opacity: 0, x: item.align === 'left' ? -40 : 40 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="grid md:grid-cols-2 gap-8 items-center"
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="grid items-center gap-6 md:grid-cols-2"
               >
-                <div className={`${item.align === 'left' ? 'md:order-1' : 'md:order-2'} p-8 rounded-2xl bg-white border border-gray-200 shadow-sm`}>
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-400 via-blue-600 to-red-600 flex items-center justify-center">
-                      <Icon size={22} className="text-white" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-blue-600">{item.number}</p>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                      <p className="text-gray-600">{item.description}</p>
-                    </div>
+                <div
+                  className={`${item.align === 'left' ? 'md:order-1' : 'md:order-2'} rounded-[1.8rem] border border-slate-200 bg-white p-8 shadow-[0_18px_50px_rgba(15,23,42,0.04)]`}
+                >
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#FCD116] via-[#002E7D] to-[#CE1126] text-white shadow-lg">
+                    <Icon size={22} />
                   </div>
+                  <h3 className="mt-5 text-2xl font-bold text-slate-900">{item.title}</h3>
+                  <p className="mt-2 text-base leading-7 text-slate-600">{item.description}</p>
                 </div>
 
-                <div className={`${item.align === 'left' ? 'md:order-2' : 'md:order-1'} h-full flex items-center justify-center`}>
-                  <div className="text-7xl font-black text-gray-200">{item.number}</div>
+                <div
+                  className={`${item.align === 'left' ? 'md:order-2' : 'md:order-1'} relative flex h-full min-h-[220px] items-center justify-center overflow-hidden rounded-[1.8rem] bg-gradient-to-br from-[#002E7D] to-[#001a4d]`}
+                >
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_rgba(252,209,22,0.25),transparent_55%)]" />
+                  <Icon size={72} strokeWidth={1.5} className="relative text-[#FCD116]" />
                 </div>
               </motion.div>
             );

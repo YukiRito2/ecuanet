@@ -1,91 +1,78 @@
-'use client';
-
 import { motion } from 'framer-motion';
-import { Globe, MessageCircle, Phone, Sparkles } from 'lucide-react';
+import { Mail, Music2, Phone } from 'lucide-react';
+
+const socials = [
+  { label: 'WhatsApp', href: 'https://wa.me/593999999999', icon: Phone },
+  { label: 'TikTok', href: 'https://tiktok.com/@limpieecu', icon: Music2 },
+  { label: 'Email', href: 'mailto:contacto@limpiezasecuador.com', icon: Mail },
+] as const;
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-4 gap-8 mb-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-br from-yellow-400 via-blue-600 to-red-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">LC</span>
+    <footer className="bg-slate-900 px-4 py-16 text-white sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-12 grid gap-10 md:grid-cols-4">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <div className="mb-4 flex items-center gap-2">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#FCD116] via-[#002E7D] to-[#CE1126]">
+                <span className="text-sm font-bold text-white">LC</span>
               </div>
-              <span className="font-bold text-lg">Limpiezas Ecuador</span>
+              <span className="text-lg font-bold">Limpiezas Ecuador</span>
             </div>
-            <p className="text-gray-400 text-sm">
+            <p className="text-sm text-slate-400">
               Servicios profesionales de limpieza en Andorra con los colores y valores de Ecuador.
             </p>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-          >
-            <h3 className="font-bold text-lg mb-4">Servicios</h3>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li><a href="#services" className="hover:text-yellow-400 transition-colors">Limpieza Corporativa</a></li>
-              <li><a href="#services" className="hover:text-yellow-400 transition-colors">Residencial</a></li>
-              <li><a href="#services" className="hover:text-yellow-400 transition-colors">Industrial</a></li>
-              <li><a href="#services" className="hover:text-yellow-400 transition-colors">Especializado</a></li>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.08 }}>
+            <h3 className="mb-4 text-lg font-bold">Servicios</h3>
+            <ul className="space-y-2 text-sm text-slate-400">
+              <li><a href="#services" className="transition-colors hover:text-[#FCD116]">Limpieza corporativa</a></li>
+              <li><a href="#services" className="transition-colors hover:text-[#FCD116]">Residencial</a></li>
+              <li><a href="#services" className="transition-colors hover:text-[#FCD116]">Industrial</a></li>
+              <li><a href="#services" className="transition-colors hover:text-[#FCD116]">Especializado</a></li>
             </ul>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            <h3 className="font-bold text-lg mb-4">Empresa</h3>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li><a href="#home" className="hover:text-yellow-400 transition-colors">Inicio</a></li>
-              <li><a href="#differentiators" className="hover:text-yellow-400 transition-colors">Sobre Nosotros</a></li>
-              <li><a href="#process" className="hover:text-yellow-400 transition-colors">Proceso</a></li>
-              <li><a href="#contact" className="hover:text-yellow-400 transition-colors">Contacto</a></li>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.16 }}>
+            <h3 className="mb-4 text-lg font-bold">Empresa</h3>
+            <ul className="space-y-2 text-sm text-slate-400">
+              <li><a href="#home" className="transition-colors hover:text-[#FCD116]">Inicio</a></li>
+              <li><a href="#differentiators" className="transition-colors hover:text-[#FCD116]">Sobre nosotros</a></li>
+              <li><a href="#process" className="transition-colors hover:text-[#FCD116]">Proceso</a></li>
+              <li><a href="#contact" className="transition-colors hover:text-[#FCD116]">Contacto</a></li>
             </ul>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            <h3 className="font-bold text-lg mb-4">Conecta Con Nosotros</h3>
-            <div className="flex gap-4 mb-6">
-              <motion.a href="https://tiktok.com/@limpieecu" target="_blank" whileHover={{ scale: 1.2, rotate: 10 }} whileTap={{ scale: 0.95 }} className="p-2 bg-gray-800 hover:bg-yellow-400 rounded-lg transition-colors">
-                <Globe size={20} className="text-gray-900" />
-              </motion.a>
-              <motion.a href="https://tiktok.com/@limpieecu" target="_blank" whileHover={{ scale: 1.2, rotate: 10 }} whileTap={{ scale: 0.95 }} className="p-2 bg-gray-800 hover:bg-yellow-400 rounded-lg transition-colors">
-                <MessageCircle size={20} className="text-gray-900" />
-              </motion.a>
-              <motion.a href="https://wa.me/593999999999" target="_blank" whileHover={{ scale: 1.2, rotate: 10 }} whileTap={{ scale: 0.95 }} className="p-2 bg-gray-800 hover:bg-yellow-400 rounded-lg transition-colors">
-                <Phone size={20} className="text-gray-900" />
-              </motion.a>
-              <motion.a href="https://linkedin.com" target="_blank" whileHover={{ scale: 1.2, rotate: 10 }} whileTap={{ scale: 0.95 }} className="p-2 bg-gray-800 hover:bg-yellow-400 rounded-lg transition-colors">
-                <Sparkles size={20} className="text-gray-900" />
-              </motion.a>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.24 }}>
+            <h3 className="mb-4 text-lg font-bold">Conecta con nosotros</h3>
+            <div className="mb-6 flex gap-3">
+              {socials.map((social) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={social.label}
+                  whileHover={{ y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-700 bg-slate-800 text-slate-300 transition-colors hover:border-[#FCD116] hover:text-[#FCD116]"
+                >
+                  <social.icon size={18} />
+                </motion.a>
+              ))}
             </div>
-            <p className="text-sm text-gray-400"><span className="font-semibold">WhatsApp:</span> +593 9 9999 9999</p>
+            <p className="text-sm text-slate-400"><span className="font-semibold text-slate-300">WhatsApp:</span> +593 9 9999 9999</p>
           </motion.div>
         </div>
 
-        <div className="border-t border-gray-800 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+        <div className="border-t border-slate-800 pt-8">
+          <div className="flex flex-col items-center justify-between gap-4 text-sm text-slate-400 md:flex-row">
             <p>© 2026 Limpiezas Ecuador. Todos los derechos reservados.</p>
             <div className="flex gap-6">
-              <a href="#" className="hover:text-yellow-400 transition-colors">Privacidad</a>
-              <a href="#" className="hover:text-yellow-400 transition-colors">Términos</a>
-              <a href="#" className="hover:text-yellow-400 transition-colors">Cookies</a>
+              <a href="#" className="transition-colors hover:text-[#FCD116]">Privacidad</a>
+              <a href="#" className="transition-colors hover:text-[#FCD116]">Términos</a>
+              <a href="#" className="transition-colors hover:text-[#FCD116]">Cookies</a>
             </div>
           </div>
         </div>

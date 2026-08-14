@@ -60,24 +60,28 @@ Gris:      #FFFFFF / #F9FAFB
 
 ```
 limpiezas-ecuador/
-├── app/
+├── src/
 │   ├── components/
-│   │   ├── Navbar.tsx          (Navegación principal)
-│   │   ├── Hero.tsx            (Sección inicial con CTA)
-│   │   ├── Services.tsx        (6 servicios)
-│   │   ├── Differentiators.tsx (4 diferenciadores)
-│   │   ├── Process.tsx         (4 pasos del proceso)
-│   │   ├── Testimonials.tsx    (3 testimonios con rating)
-│   │   ├── Contact.tsx         (Formulario y CTA)
-│   │   ├── ChatBot.tsx         (Asistente Leo)
-│   │   └── Footer.tsx          (Pie de página)
-│   ├── page.tsx                (Página principal)
-│   ├── layout.tsx              (Layout global)
-│   └── globals.css             (Estilos globales)
-├── public/                     (Assets)
-├── package.json                (Dependencias)
-├── tsconfig.json               (Configuración TypeScript)
-└── tailwind.config.js          (Configuración Tailwind)
+│   │   ├── Navbar.tsx           (Navegación principal)
+│   │   ├── PremiumHero.tsx      (Sección inicial con CTA)
+│   │   ├── PremiumServices.tsx  (Servicios)
+│   │   ├── PremiumShowcase.tsx  (Galería de trabajos)
+│   │   ├── ResultsSection.tsx   (Antes y después)
+│   │   ├── PriceValue.tsx       (Planes y precios)
+│   │   ├── Differentiators.tsx  (Diferenciadores)
+│   │   ├── Process.tsx          (Pasos del proceso)
+│   │   ├── Testimonials.tsx     (Testimonios con rating)
+│   │   ├── Contact.tsx          (Formulario y CTA)
+│   │   ├── ChatBot.tsx          (Asistente Leo)
+│   │   └── Footer.tsx           (Pie de página)
+│   ├── App.tsx                  (Componente raíz)
+│   ├── translations.ts          (Textos ES/CA/FR)
+│   ├── main.tsx                 (Entry point)
+│   └── index.css                (Estilos globales / Tailwind)
+├── index.html                   (HTML raíz de Vite)
+├── vite.config.ts               (Configuración de Vite)
+├── package.json                 (Dependencias)
+└── tsconfig.json                (Configuración TypeScript)
 ```
 
 ---
@@ -91,8 +95,8 @@ npm run dev
 # Compilar para producción
 npm run build
 
-# Ejecutar versión producción
-npm start
+# Previsualizar la build de producción
+npm run preview
 
 # Lint del código
 npm run lint
@@ -102,11 +106,12 @@ npm run lint
 
 ## 📦 Dependencias Principales
 
-- **Next.js 16.3.1**: Framework React con SSR
-- **Framer Motion 12.0.0**: Animaciones profesionales
+- **Vite**: Build tool y servidor de desarrollo
+- **React 19**: Librería de UI
+- **Framer Motion**: Animaciones profesionales
 - **Lucide React**: Iconos modernos
-- **Tailwind CSS 3.4.1**: Estilos utility-first
-- **TypeScript 5.3.3**: Type safety
+- **Tailwind CSS 4**: Estilos utility-first
+- **TypeScript**: Type safety
 
 ---
 
@@ -180,7 +185,7 @@ Actualmente configurado con números de ejemplo. Reemplazar:
 4. **Añadir sección de galería** con proyectos
 5. **Implementar SEO** y Open Graph
 6. **Agregar animaciones adicionales** con Lottie
-7. **Deploy** en Vercel (gratis para Next.js)
+7. **Deploy** en Vercel/Netlify (sitio estático generado por Vite)
 
 ---
 
@@ -198,7 +203,7 @@ Actualmente configurado con números de ejemplo. Reemplazar:
 **Creado con:**
 - ❤️ Emil Kowalski Motion Principles
 - 🎨 Taste Skill (Anti-slop design)
-- ⚡ Next.js & Framer Motion
+- ⚡ Vite & Framer Motion
 - 🇪🇨 Colores de Ecuador
 
 **Última actualización**: 2026-08-14

@@ -1,9 +1,16 @@
-<!-- BEGIN:nextjs-agent-rules -->
+# Limpiezas Ecuador — guía del proyecto
 
-# This is NOT the Next.js you know
+Landing page en **React 19 + Vite + TypeScript + Tailwind CSS 4**. No usa Next.js: no hay carpeta `app/`, no hay SSR, no hay `next.config`.
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+## Comandos
 
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+- `npm run dev` — servidor de desarrollo (puerto 3000)
+- `npm run build` — build de producción (`vite build`)
+- `npm run preview` — sirve la build de `dist/`
+- `npm run lint` — ESLint (flat config en `eslint.config.mjs`)
 
-<!-- END:nextjs-agent-rules -->
+## Estructura
+
+- `src/App.tsx` — componente raíz, ensambla las secciones de la página
+- `src/translations.ts` — textos en ES/CA/FR y el tipo `Lang`
+- `src/components/` — una sección por archivo (Navbar, PremiumHero, PremiumServices, PremiumShowcase, ResultsSection, PriceValue, Differentiators, Process, Testimonials, Contact, ChatBot, Footer)

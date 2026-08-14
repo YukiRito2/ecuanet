@@ -1,8 +1,6 @@
-'use client';
-
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, X, Send, Smile, MessageSquareText, Phone } from 'lucide-react';
+import { X, Send, Smile, MessageSquareText, Phone } from 'lucide-react';
 
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -120,7 +118,7 @@ export default function ChatBot() {
                   <div
                     className={`max-w-xs px-4 py-2 rounded-lg ${
                       msg.type === 'user'
-                        ? 'bg-blue-600 text-white rounded-br-none'
+                        ? 'bg-[#002E7D] text-white rounded-br-none'
                         : 'bg-gray-100 text-gray-900 rounded-bl-none'
                     }`}
                   >

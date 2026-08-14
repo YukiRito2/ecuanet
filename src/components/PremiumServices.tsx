@@ -1,5 +1,3 @@
-'use client';
-
 import { motion } from 'framer-motion';
 import { Building2, Castle, Home, Sparkles, Truck, Wrench } from 'lucide-react';
 
