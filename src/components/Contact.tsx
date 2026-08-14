@@ -41,6 +41,7 @@ export default function Contact({ t }: ContactProps) {
               <motion.a
                 href="https://wa.me/593999999999"
                 target="_blank"
+                rel="noreferrer"
                 whileHover={{ x: 4 }}
                 className="flex items-center gap-3 rounded-2xl border border-slate-200 p-4 transition-colors hover:border-[#FCD116] hover:bg-yellow-50/60"
               >
@@ -97,6 +98,7 @@ export default function Contact({ t }: ContactProps) {
               <motion.a
                 href="https://wa.me/593999999999"
                 target="_blank"
+                rel="noreferrer"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#FCD116] to-[#f5b700] px-8 py-4 font-bold text-slate-900 shadow-[0_20px_40px_rgba(252,209,22,0.35)] transition-all"

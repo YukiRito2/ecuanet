@@ -145,6 +145,7 @@ export default function PriceValue({ lang }: PriceValueProps) {
           <motion.a
             href="https://wa.me/593999999999"
             target="_blank"
+            rel="noreferrer"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.98 }}
             className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#FCD116] to-[#f5b700] px-8 py-4 font-bold text-slate-900 shadow-[0_20px_40px_rgba(252,209,22,0.35)] transition-all"

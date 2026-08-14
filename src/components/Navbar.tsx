@@ -96,6 +96,7 @@ export default function Navbar({ lang, setLang, t }: NavbarProps) {
             <motion.a
               href="https://wa.me/593999999999"
               target="_blank"
+              rel="noreferrer"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               whileHover={{ scale: 1.05 }}
@@ -152,6 +153,7 @@ export default function Navbar({ lang, setLang, t }: NavbarProps) {
             <a
               href="https://wa.me/593999999999"
               target="_blank"
+              rel="noreferrer"
               className="block w-full rounded-full bg-gradient-to-r from-yellow-400 to-yellow-500 px-4 py-2 text-center font-semibold text-gray-900"
             >
               WhatsApp
