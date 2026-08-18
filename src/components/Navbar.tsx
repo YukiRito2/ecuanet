@@ -4,6 +4,7 @@ import { ChevronDown, Menu, X } from 'lucide-react';
 import type { Lang } from '../translations';
 import logo from '../assets/ecuanet-logo.png';
 import { scrollToSection } from '../utils/scrollToSection';
+import LanguageFlag from './LanguageFlag';
 
 interface NavbarProps {
   lang: Lang;
@@ -64,6 +65,7 @@ export default function Navbar({ lang, setLang, t }: NavbarProps) {
                 onClick={() => setLanguageOpen((prev) => !prev)}
                 className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm"
               >
+                <LanguageFlag lang={lang} />
                 {languages.find((item) => item.code === lang)?.label}
                 <ChevronDown size={16} />
               </button>
@@ -77,12 +79,12 @@ export default function Navbar({ lang, setLang, t }: NavbarProps) {
                         setLang(item.code as Lang);
                         setLanguageOpen(false);
                       }}
-                      className={`flex w-full items-center justify-between px-3 py-2 text-left text-sm transition-colors ${
+                      className={`flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition-colors ${
                         lang === item.code ? 'bg-slate-100 font-semibold text-slate-900' : 'text-slate-600 hover:bg-slate-50'
                       }`}
                     >
-                      <span>{item.label}</span>
-                      <span>{item.code === 'es' ? 'ES' : item.code === 'ca' ? 'CAT' : 'FR'}</span>
+                      <LanguageFlag lang={item.code} />
+                      {item.label}
                     </button>
                   ))}
                 </div>
@@ -107,8 +109,9 @@ export default function Navbar({ lang, setLang, t }: NavbarProps) {
             <div className="relative">
               <button
                 onClick={() => setLanguageOpen((prev) => !prev)}
-                className="rounded-full border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700"
+                className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-semibold text-slate-700"
               >
+                <LanguageFlag lang={lang} />
                 {languages.find((item) => item.code === lang)?.label}
               </button>
               {languageOpen && (
@@ -120,8 +123,9 @@ export default function Navbar({ lang, setLang, t }: NavbarProps) {
                         setLang(item.code as Lang);
                         setLanguageOpen(false);
                       }}
-                      className="block w-full px-3 py-2 text-left text-xs font-medium text-slate-700 hover:bg-slate-50"
+                      className="flex w-full items-center gap-1.5 px-3 py-2 text-left text-xs font-medium text-slate-700 hover:bg-slate-50"
                     >
+                      <LanguageFlag lang={item.code} />
                       {item.label}
                     </button>
                   ))}
