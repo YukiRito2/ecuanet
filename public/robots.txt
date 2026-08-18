@@ -1,3 +1,7 @@
+# Ecuanet — servicio de limpieza profesional en Andorra
+# No hay rutas privadas ni contenido duplicado que restringir: se permite
+# el rastreo completo a cualquier robot.
+
 User-agent: *
 Allow: /
 

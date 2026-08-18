@@ -1,0 +1,13 @@
+{
+  "name": "Ecuanet | Servicio de Limpieza Profesional en Andorra",
+  "short_name": "Ecuanet",
+  "description": "Servicio de limpieza profesional en Andorra: oficinas, viviendas, hoteles, comercios y espacios corporativos.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#002E7D",
+  "lang": "es",
+  "icons": [
+    { "src": "/favicon.png", "sizes": "284x284", "type": "image/png" }
+  ]
+}
