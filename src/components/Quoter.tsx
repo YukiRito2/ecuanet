@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import WhatsAppIcon from './WhatsAppIcon';
+import { RainbowIconButton } from './RainbowButton';
 import {
   X,
   Calculator,
@@ -339,15 +340,13 @@ export default function Quoter({ t, isOpen, setIsOpen }: QuoterProps) {
             </motion.span>
           )}
         </AnimatePresence>
-        <motion.button
+        <RainbowIconButton
           onClick={() => setIsOpen((v) => !v)}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#FCD116] to-[#f5b700] text-slate-900 shadow-[0_18px_40px_rgba(251,191,36,0.45)]"
-          aria-label={t.launcherAria}
+          ariaLabel={t.launcherAria}
+          className="h-16 w-16 shadow-[0_18px_40px_rgba(251,191,36,0.45)]"
         >
           <AnimatePresence>{!isOpen && <Calculator size={28} />}</AnimatePresence>
-        </motion.button>
+        </RainbowIconButton>
       </div>
 
       <AnimatePresence>
