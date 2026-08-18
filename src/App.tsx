@@ -38,7 +38,7 @@ export default function App() {
         <Process lang={lang} t={t.process} />
       </div>
       <div className="border-t border-slate-100 bg-white">
-        <Testimonials lang={lang} t={t.testimonials} />
+        <Testimonials lang={lang} t={t.testimonials} stat1={t.hero.stat1} stat2={t.hero.stat2} />
       </div>
       <div className="border-t border-slate-100 bg-white">
         <Contact lang={lang} t={t.contact} />

@@ -74,6 +74,9 @@ export const translations = {
         { name: 'María García', company: 'Consultora A', text: 'La limpieza de nuestras oficinas cambió por completo la experiencia de clientes y equipos.' },
         { name: 'Carlos Moreno', company: 'Centro Comercial', text: 'Cumplieron perfectamente con tiempos, estándares y atención del equipo.' },
       ],
+      ratingLabel: 'Valoración media de nuestros clientes',
+      ctaLabel: '¿Quieres ser el próximo?',
+      ctaSub: 'Escríbenos y cuéntanos tu proyecto',
     },
     contact: {
       title: 'Agenda Tu Diagnóstico Gratuito',
@@ -237,6 +240,9 @@ export const translations = {
         { name: 'María García', company: 'Consultora A', text: 'La neteja de les nostres oficines va canviar per complet l’experiència de clients i equips.' },
         { name: 'Carlos Moreno', company: 'Centre Comercial', text: 'Van complir perfectament amb temps, estàndards i atenció de l’equip.' },
       ],
+      ratingLabel: 'Valoració mitjana dels nostres clients',
+      ctaLabel: 'Vols ser el següent?',
+      ctaSub: 'Escriu-nos i explica\'ns el teu projecte',
     },
     contact: {
       title: 'Programa el teu Diagnòstic Gratuït',
@@ -400,6 +406,9 @@ export const translations = {
         { name: 'María García', company: 'Consultora A', text: 'Le nettoyage de nos bureaux a complètement changé l’expérience de nos clients et de nos équipes.' },
         { name: 'Carlos Moreno', company: 'Centre Commercial', text: 'Ils ont parfaitement respecté les délais, les standards et l’attention de l’équipe.' },
       ],
+      ratingLabel: 'Note moyenne de nos clients',
+      ctaLabel: 'Vous voulez être le prochain ?',
+      ctaSub: 'Écrivez-nous et parlez-nous de votre projet',
     },
     contact: {
       title: 'Planifiez Votre Diagnostic Gratuit',
