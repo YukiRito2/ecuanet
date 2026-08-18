@@ -9,9 +9,10 @@ interface CompareSliderProps {
   afterLabel: string;
   beforeAlt: string;
   afterAlt: string;
+  className?: string;
 }
 
-export default function CompareSlider({ before, after, beforeLabel, afterLabel, beforeAlt, afterAlt }: CompareSliderProps) {
+export default function CompareSlider({ before, after, beforeLabel, afterLabel, beforeAlt, afterAlt, className }: CompareSliderProps) {
   const [position, setPosition] = useState(50);
   const [hasInteracted, setHasInteracted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -53,7 +54,7 @@ export default function CompareSlider({ before, after, beforeLabel, afterLabel, 
       ref={containerRef}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
-      className="group relative aspect-[4/3] w-full touch-none select-none overflow-hidden rounded-2xl bg-slate-100"
+      className={`group relative w-full touch-none select-none overflow-hidden rounded-2xl bg-slate-100 ${className ?? 'h-64'}`}
     >
       <img src={after} alt={afterAlt} draggable={false} className="pointer-events-none absolute inset-0 h-full w-full object-cover" />
       <div

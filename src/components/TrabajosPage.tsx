@@ -56,7 +56,7 @@ export default function TrabajosPage({ onOpenQuoter, t }: TrabajosPageProps) {
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ delay: (index % 3) * 0.08, duration: 0.5 }}
-                  className={`overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_25px_60px_rgba(15,23,42,0.07)] ${featured ? 'lg:col-span-2' : ''}`}
+                  className={`flex flex-col overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_25px_60px_rgba(15,23,42,0.07)] ${featured ? 'lg:col-span-2' : ''}`}
                 >
                   <div className="flex items-center justify-between bg-slate-900 px-5 py-4 text-white">
                     <span className="text-sm font-semibold uppercase tracking-[0.22em] text-slate-300">{job.category}</span>
@@ -74,10 +74,11 @@ export default function TrabajosPage({ onOpenQuoter, t }: TrabajosPageProps) {
                       afterLabel={t.after}
                       beforeAlt={`${job.category} en ${job.location}, antes`}
                       afterAlt={`${job.category} en ${job.location}, después`}
+                      className="h-56 sm:h-64"
                     />
                   </div>
 
-                  <p className="px-5 pb-6 text-base leading-7 text-slate-600">{job.description}</p>
+                  <p className="flex-1 px-5 pb-6 text-base leading-7 text-slate-600">{job.description}</p>
                 </motion.article>
               );
             })}
