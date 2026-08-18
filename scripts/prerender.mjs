@@ -10,7 +10,29 @@ import { createServer } from 'node:http';
 import { readFile, writeFile } from 'node:fs/promises';
 import { extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import puppeteer from 'puppeteer';
+import puppeteerCore from 'puppeteer-core';
+
+// Vercel's build image is missing shared libs (libnspr4.so etc.) that the
+// full `puppeteer` download of Chromium needs, so plain `puppeteer` only
+// works for local dev. On CI/Vercel we instead launch @sparticuz/chromium,
+// a static build made for serverless Linux with no external lib dependencies.
+const isServerless = Boolean(process.env.VERCEL || process.env.CI);
+
+async function launchBrowser() {
+  if (isServerless) {
+    const { default: chromium } = await import('@sparticuz/chromium');
+    return puppeteerCore.launch({
+      args: chromium.args,
+      executablePath: await chromium.executablePath(),
+      headless: true,
+    });
+  }
+  const { default: puppeteer } = await import('puppeteer');
+  return puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
+}
 
 const DIST_DIR = new URL('../dist/', import.meta.url);
 const PORT = 4174;
@@ -49,10 +71,7 @@ function startStaticServer() {
 
 async function main() {
   const server = await startStaticServer();
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  });
+  const browser = await launchBrowser();
 
   try {
     const page = await browser.newPage();
