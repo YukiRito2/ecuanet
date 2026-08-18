@@ -5,12 +5,12 @@ import DotBackground from './DotBackground';
 
 const VIDEO_IDS = ['wnEQU7YlnmY', '315eHWE3FSs', '42Fkpj29JLE'] as const;
 
-function AutoplayShort({ videoId }: { videoId: string }) {
+function AutoplayShort({ videoId, className = 'h-52 w-full' }: { videoId: string; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <div ref={ref} className="mx-auto aspect-[9/16] w-32 overflow-hidden rounded-2xl border border-slate-200 bg-slate-900 sm:w-36">
+    <div ref={ref} className={`overflow-hidden bg-slate-900 ${className}`}>
       {isInView && (
         <iframe
           className="h-full w-full"
@@ -113,12 +113,8 @@ export default function ResultsSection({ t }: ResultsSectionProps) {
                     <span>{t.after}</span>
                     <Sparkles size={14} />
                   </div>
-                  <img src={item.after} alt={`${item.title} ${t.after.toLowerCase()}`} className="h-52 w-full object-cover" />
+                  <AutoplayShort videoId={item.videoId} className="h-52 w-full" />
                 </div>
-              </div>
-
-              <div className="px-4">
-                <AutoplayShort videoId={item.videoId} />
               </div>
 
               <div className="space-y-4 px-5 pb-6 pt-4">
