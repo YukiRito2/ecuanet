@@ -26,7 +26,7 @@ export default function App() {
         <PremiumServices lang={lang} t={t.services} />
       </div>
       <div id="works" className="border-t border-slate-100 bg-slate-50">
-        <PremiumShowcase />
+        <PremiumShowcase lang={lang} t={t.showcase} />
       </div>
       <div className="border-t border-slate-100 bg-white">
         <ResultsSection lang={lang} t={t.results} />
@@ -35,16 +35,16 @@ export default function App() {
         <PriceValue lang={lang} />
       </div>
       <div className="border-t border-slate-100 bg-slate-50">
-        <Process />
+        <Process lang={lang} t={t.process} />
       </div>
       <div className="border-t border-slate-100 bg-white">
-        <Testimonials />
+        <Testimonials lang={lang} t={t.testimonials} />
       </div>
       <div className="border-t border-slate-100 bg-white">
         <Contact lang={lang} t={t.contact} />
       </div>
-      <Quoter />
-      <Footer />
+      <Quoter lang={lang} t={t.quoter} />
+      <Footer lang={lang} t={t.footer} />
     </main>
   );
 }

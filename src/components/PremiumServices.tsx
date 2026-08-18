@@ -6,55 +6,23 @@ interface PremiumServicesProps {
   t: {
     eyebrow: string;
     title: string;
+    list: readonly { title: string; description: string }[];
   };
 }
 
-const services = [
-  {
-    title: 'Limpieza corporativa',
-    description: 'Oficinas y edificios con protocolos rigurosos y atención constante.',
-    icon: Building2,
-    image:
-      'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    title: 'Residencial premium',
-    description: 'Hogares y condominios con servicios discretos y de alto detalle.',
-    icon: Home,
-    image:
-      'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    title: 'Hospitalidad y hoteles',
-    description: 'Espacios de recepción impecables que dejan una primera impresión excelente.',
-    icon: Castle,
-    image:
-      'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    title: 'Industrial',
-    description: 'Entornos de trabajo con mantenimiento, seguridad y cumplimiento operativo.',
-    icon: Truck,
-    image:
-      'https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    title: 'Restauración y detalle',
-    description: 'Mantenimiento profundo para mejorar la estética y durabilidad del inmueble.',
-    icon: Sparkles,
-    image:
-      'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    title: 'Mantenimiento integral',
-    description: 'Planes personalizados para cuidar cada rincón y prevenir desgaste.',
-    icon: Wrench,
-    image:
-      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=900&q=80',
-  },
+const icons = [Building2, Home, Castle, Truck, Sparkles, Wrench];
+const images = [
+  'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80',
+  'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80',
+  'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=900&q=80',
+  'https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=900&q=80',
+  'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80',
+  'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=900&q=80',
 ];
 
 export default function PremiumServices({ t }: PremiumServicesProps) {
+  const services = t.list.map((service, i) => ({ ...service, icon: icons[i], image: images[i] }));
+
   return (
     <section id="services" className="bg-white py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -7,37 +7,31 @@ interface ResultsSectionProps {
     eyebrow: string;
     title: string;
     btn: string;
+    before: string;
+    after: string;
+    video: string;
+    cases: readonly { title: string; result: string }[];
   };
 }
 
-const cases = [
+const images = [
   {
-    title: 'Oficina corporativa',
-    before:
-      'https://images.unsplash.com/photo-1497366412874-3415097a27e7?auto=format&fit=crop&w=900&q=80',
-    after:
-      'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80',
-    result: '90% mejor percepción del espacio',
+    before: 'https://images.unsplash.com/photo-1497366412874-3415097a27e7?auto=format&fit=crop&w=900&q=80',
+    after: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80',
   },
   {
-    title: 'Residencia premium',
-    before:
-      'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80',
-    after:
-      'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80',
-    result: 'Ambiente más vivo y confortable',
+    before: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80',
+    after: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80',
   },
   {
-    title: 'Hotel y recepciones',
-    before:
-      'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=900&q=80',
-    after:
-      'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=900&q=80',
-    result: 'Primera impresión de lujo',
+    before: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=900&q=80',
+    after: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=900&q=80',
   },
 ];
 
 export default function ResultsSection({ t }: ResultsSectionProps) {
+  const cases = t.cases.map((item, i) => ({ ...item, ...images[i] }));
+
   return (
     <section id="results" className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50 to-white py-24">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(0,46,125,0.08),transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(252,209,22,0.10),transparent_30%)]" />
@@ -76,7 +70,7 @@ export default function ResultsSection({ t }: ResultsSectionProps) {
                   </span>
                   <div className="flex items-center gap-2 text-yellow-300">
                     <PlayCircle size={18} />
-                    <span className="text-xs uppercase tracking-[0.18em]">Video</span>
+                    <span className="text-xs uppercase tracking-[0.18em]">{t.video}</span>
                   </div>
                 </div>
               </div>
@@ -84,18 +78,18 @@ export default function ResultsSection({ t }: ResultsSectionProps) {
               <div className="grid grid-cols-2 gap-3 p-4">
                 <div className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-100">
                   <div className="flex items-center justify-between bg-slate-50 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
-                    <span>Antes</span>
+                    <span>{t.before}</span>
                     <Camera size={14} />
                   </div>
-                  <img src={item.before} alt={`${item.title} antes`} className="h-52 w-full object-cover" />
+                  <img src={item.before} alt={`${item.title} ${t.before.toLowerCase()}`} className="h-52 w-full object-cover" />
                 </div>
 
                 <div className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-100">
                   <div className="flex items-center justify-between bg-emerald-50 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-700">
-                    <span>Después</span>
+                    <span>{t.after}</span>
                     <Sparkles size={14} />
                   </div>
-                  <img src={item.after} alt={`${item.title} después`} className="h-52 w-full object-cover" />
+                  <img src={item.after} alt={`${item.title} ${t.after.toLowerCase()}`} className="h-52 w-full object-cover" />
                 </div>
               </div>
 

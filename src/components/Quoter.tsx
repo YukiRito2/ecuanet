@@ -20,6 +20,7 @@ import {
 
 type PropertyType = 'vivienda' | 'empresa';
 type Frequency = 'recurrente' | 'unica';
+type ExtraKey = 'vaporeta' | 'aspirador' | 'planxa' | 'express';
 type StepId = 'property' | 'frequency' | 'hours' | 'products' | 'location' | 'extras' | 'summary';
 
 interface Answers {
@@ -29,7 +30,58 @@ interface Answers {
   hours: number | null;
   products: boolean | null;
   location: string | null;
-  extras: string[];
+  extras: ExtraKey[];
+}
+
+interface QuoterProps {
+  lang: 'es' | 'ca' | 'fr';
+  t: {
+    launcherLabel: string;
+    launcherAria: string;
+    panelTitle: string;
+    panelSubtitle: string;
+    closeAria: string;
+    perVisit: string;
+    configureHint: string;
+    back: string;
+    steps: Record<StepId, string>;
+    property: { home: string; business: string };
+    frequency: { recurring: string; recurringSub: string; once: string };
+    hours: { customButton: string; customPlaceholder: string; continueAria: string };
+    products: { yes: string; no: string; noSub: string };
+    extras: Record<ExtraKey, string> & { continueBtn: string; skipBtn: string };
+    summary: {
+      totalWithIgi: string;
+      perVisitUnit: string;
+      approxPrice: string;
+      viewBreakdown: string;
+      productsLine: string;
+      travelLine: string;
+      extrasLine: string;
+      subtotal: string;
+      recurringDiscount: string;
+      igi: string;
+      total: string;
+      nameLabel: string;
+      namePlaceholder: string;
+      sendWhatsapp: string;
+      restart: string;
+    };
+    whatsappMessage: {
+      greeting: string;
+      greetingWithName: string;
+      intro: string;
+      type: string;
+      frequency: string;
+      hours: string;
+      products: string;
+      location: string;
+      extras: string;
+      noExtras: string;
+      estimate: string;
+      perVisit: string;
+    };
+  };
 }
 
 const EMPTY_ANSWERS: Answers = {
@@ -62,12 +114,8 @@ const TRAVEL_FEE: Record<string, number> = {
   'El Pas de la Casa': 15,
 };
 const LOCATIONS = Object.keys(TRAVEL_FEE);
-const EXTRAS = [
-  { key: 'vaporeta', label: 'Vaporeta', price: 25 },
-  { key: 'aspirador', label: 'Aspirador', price: 15 },
-  { key: 'planxa', label: 'Planxa', price: 18 },
-  { key: 'express', label: 'Express', price: 40 },
-] as const;
+const EXTRA_PRICES: Record<ExtraKey, number> = { vaporeta: 25, aspirador: 15, planxa: 18, express: 40 };
+const EXTRA_KEYS: ExtraKey[] = ['vaporeta', 'aspirador', 'planxa', 'express'];
 const RECURRING_DISCOUNT = 0.1;
 const IGI_RATE = 0.045;
 const HOUR_OPTIONS = [2, 3, 4, 5];
@@ -84,10 +132,7 @@ function computeQuote(answers: Answers) {
   const base = rate * hours;
   const productsFee = answers.products ? PRODUCTS_FEE : 0;
   const travelFee = answers.location ? (TRAVEL_FEE[answers.location] ?? 10) : 0;
-  const extrasTotal = answers.extras.reduce((sum, key) => {
-    const extra = EXTRAS.find((e) => e.key === key);
-    return sum + (extra?.price ?? 0);
-  }, 0);
+  const extrasTotal = answers.extras.reduce((sum, key) => sum + EXTRA_PRICES[key], 0);
   const subtotal = base + productsFee + travelFee + extrasTotal;
   const discount = answers.frequency === 'recurrente' ? subtotal * RECURRING_DISCOUNT : 0;
   const discounted = subtotal - discount;
@@ -112,9 +157,9 @@ function StepRail({ index }: { index: number }) {
   );
 }
 
-function PriceTicker({ value, ready }: { value: number; ready: boolean }) {
+function PriceTicker({ value, ready, unit, hint }: { value: number; ready: boolean; unit: string; hint: string }) {
   if (!ready) {
-    return <span className="text-sm font-semibold text-slate-400">Configura tu servicio</span>;
+    return <span className="text-sm font-semibold text-slate-400">{hint}</span>;
   }
   return (
     <span className="flex items-baseline gap-1">
@@ -127,7 +172,7 @@ function PriceTicker({ value, ready }: { value: number; ready: boolean }) {
       >
         {formatEUR(value)} €
       </motion.span>
-      <span className="text-xs font-medium text-slate-400">por visita</span>
+      <span className="text-xs font-medium text-slate-400">{unit}</span>
     </span>
   );
 }
@@ -186,7 +231,7 @@ function OptionCard({
   );
 }
 
-function BackLink({ onClick }: { onClick: () => void }) {
+function BackLink({ label, onClick }: { label: string; onClick: () => void }) {
   return (
     <button
       type="button"
@@ -194,22 +239,12 @@ function BackLink({ onClick }: { onClick: () => void }) {
       className="inline-flex items-center gap-1 text-xs font-medium text-slate-400 transition-colors hover:text-slate-600"
     >
       <ArrowLeft size={13} />
-      Atrás
+      {label}
     </button>
   );
 }
 
-const STEP_HEADING: Record<StepId, string> = {
-  property: '¿Qué tipo de espacio necesitas limpiar?',
-  frequency: '¿Buscas un servicio recurrente o solo por esta vez?',
-  hours: '¿Cuántas horas por visita necesitas?',
-  products: '¿Quieres que llevemos los productos de limpieza?',
-  location: '¿Dónde necesitas el servicio?',
-  extras: '¿Algún extra? (opcional)',
-  summary: 'Tu presupuesto orientativo',
-};
-
-export default function Quoter() {
+export default function Quoter({ t }: QuoterProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [stepIndex, setStepIndex] = useState(0);
   const [direction, setDirection] = useState(1);
@@ -239,12 +274,12 @@ export default function Quoter() {
     setStepIndex(0);
   };
 
-  const propertyLabel = answers.property === 'empresa' ? 'Empresa' : 'Vivienda particular';
-  const frequencyLabel = answers.frequency === 'recurrente' ? 'Servicio recurrente' : 'Una sola vez';
-  const productsLabel = answers.products ? 'Sí, llevad los productos' : 'No hace falta, ya tengo';
+  const propertyLabel = answers.property === 'empresa' ? t.property.business : t.property.home;
+  const frequencyLabel = answers.frequency === 'recurrente' ? t.frequency.recurring : t.frequency.once;
+  const productsLabel = answers.products ? t.products.yes : `${t.products.no}, ${t.products.noSub}`;
   const extrasLabel = answers.extras.length
-    ? answers.extras.map((k) => EXTRAS.find((e) => e.key === k)?.label).join(', ')
-    : 'Sin extras';
+    ? answers.extras.map((k) => t.extras[k]).join(', ')
+    : t.whatsappMessage.noExtras;
 
   const submitCustomHours = () => {
     const n = Number(customHours);
@@ -254,7 +289,7 @@ export default function Quoter() {
     goNext();
   };
 
-  const toggleExtra = (key: string) => {
+  const toggleExtra = (key: ExtraKey) => {
     setAnswers((a) => ({
       ...a,
       extras: a.extras.includes(key) ? a.extras.filter((k) => k !== key) : [...a.extras, key],
@@ -263,14 +298,15 @@ export default function Quoter() {
 
   const whatsappMessage = encodeURIComponent(
     [
-      `Hola${answers.name ? `, soy ${answers.name}` : ''}. Quiero solicitar una limpieza:`,
-      `- Tipo: ${propertyLabel}`,
-      `- Frecuencia: ${frequencyLabel}`,
-      `- Horas por visita: ${answers.hours}h`,
-      `- Productos: ${productsLabel}`,
-      `- Ubicación: ${answers.location}`,
-      `- Extras: ${extrasLabel}`,
-      `Presupuesto orientativo: ${formatEUR(quote.total)} € por visita.`,
+      answers.name ? t.whatsappMessage.greetingWithName.replace('{name}', answers.name) : t.whatsappMessage.greeting,
+      t.whatsappMessage.intro,
+      `- ${t.whatsappMessage.type}: ${propertyLabel}`,
+      `- ${t.whatsappMessage.frequency}: ${frequencyLabel}`,
+      `- ${t.whatsappMessage.hours}: ${answers.hours}h`,
+      `- ${t.whatsappMessage.products}: ${productsLabel}`,
+      `- ${t.whatsappMessage.location}: ${answers.location}`,
+      `- ${t.whatsappMessage.extras}: ${extrasLabel}`,
+      `${t.whatsappMessage.estimate} ${formatEUR(quote.total)} ${t.whatsappMessage.perVisit}`,
     ].join('\n'),
   );
 
@@ -298,7 +334,7 @@ export default function Quoter() {
               transition={{ duration: 0.3, ease: EASE, delay: 0.6 }}
               className="hidden whitespace-nowrap rounded-full border border-slate-200 bg-white px-3.5 py-2 text-sm font-semibold text-slate-800 shadow-lg sm:block"
             >
-              Calcula tu presupuesto
+              {t.launcherLabel}
             </motion.span>
           )}
         </AnimatePresence>
@@ -307,7 +343,7 @@ export default function Quoter() {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#FCD116] to-[#f5b700] text-slate-900 shadow-[0_18px_40px_rgba(251,191,36,0.45)]"
-          aria-label="Calcular presupuesto"
+          aria-label={t.launcherAria}
         >
           <AnimatePresence>{!isOpen && <Calculator size={28} />}</AnimatePresence>
         </motion.button>
@@ -328,17 +364,17 @@ export default function Quoter() {
                   <Calculator size={17} className="text-white" />
                 </div>
                 <div>
-                  <p className="text-sm font-bold leading-tight text-slate-900">Calculadora de presupuesto</p>
-                  <p className="text-xs text-slate-500">Precio estimado al instante</p>
+                  <p className="text-sm font-bold leading-tight text-slate-900">{t.panelTitle}</p>
+                  <p className="text-xs text-slate-500">{t.panelSubtitle}</p>
                 </div>
               </div>
-              <button onClick={() => setIsOpen(false)} className="rounded-full p-1.5 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600" aria-label="Cerrar">
+              <button onClick={() => setIsOpen(false)} className="rounded-full p-1.5 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600" aria-label={t.closeAria}>
                 <X size={18} />
               </button>
             </div>
 
             <div className="flex items-center justify-between border-y border-slate-100 bg-slate-50/60 px-5 py-3">
-              <PriceTicker value={quote.discounted} ready={quote.ready} />
+              <PriceTicker value={quote.discounted} ready={quote.ready} unit={t.perVisit} hint={t.configureHint} />
               <StepRail index={stepIndex} />
             </div>
 
@@ -352,21 +388,21 @@ export default function Quoter() {
                   transition={{ duration: 0.2, ease: EASE }}
                   className="space-y-4"
                 >
-                  <h3 className="text-base font-bold text-slate-900">{STEP_HEADING[step]}</h3>
+                  <h3 className="text-base font-bold text-slate-900">{t.steps[step]}</h3>
 
                   {step === 'property' && (
                     <div className="space-y-3">
                       <div className="flex gap-2">
                         <OptionCard
                           icon={Home}
-                          label="Vivienda particular"
+                          label={t.property.home}
                           badge={`${HOURLY_RATE.vivienda}€/h`}
                           selected={answers.property === 'vivienda'}
                           onClick={() => { setAnswers((a) => ({ ...a, property: 'vivienda' })); goNext(); }}
                         />
                         <OptionCard
                           icon={Building2}
-                          label="Empresa"
+                          label={t.property.business}
                           badge={`${HOURLY_RATE.empresa}€/h`}
                           selected={answers.property === 'empresa'}
                           onClick={() => { setAnswers((a) => ({ ...a, property: 'empresa' })); goNext(); }}
@@ -380,20 +416,20 @@ export default function Quoter() {
                       <div className="flex gap-2">
                         <OptionCard
                           icon={Repeat}
-                          label="Recurrente"
-                          sub="cada semana o mes"
+                          label={t.frequency.recurring}
+                          sub={t.frequency.recurringSub}
                           badge="-10%"
                           selected={answers.frequency === 'recurrente'}
                           onClick={() => { setAnswers((a) => ({ ...a, frequency: 'recurrente' })); goNext(); }}
                         />
                         <OptionCard
                           icon={CalendarClock}
-                          label="Una sola vez"
+                          label={t.frequency.once}
                           selected={answers.frequency === 'unica'}
                           onClick={() => { setAnswers((a) => ({ ...a, frequency: 'unica' })); goNext(); }}
                         />
                       </div>
-                      <BackLink onClick={goBack} />
+                      <BackLink label={t.back} onClick={goBack} />
                     </div>
                   )}
 
@@ -425,7 +461,7 @@ export default function Quoter() {
                             onClick={() => setShowCustomHours(true)}
                             className="col-span-3 rounded-2xl border border-dashed border-slate-300 bg-white py-2.5 text-sm font-medium text-slate-500 hover:border-[#002E7D]/40"
                           >
-                            Otra cantidad
+                            {t.hours.customButton}
                           </motion.button>
                         </div>
                       ) : (
@@ -437,7 +473,7 @@ export default function Quoter() {
                             value={customHours}
                             onChange={(e) => setCustomHours(e.target.value)}
                             onKeyDown={(e) => e.key === 'Enter' && submitCustomHours()}
-                            placeholder="Nº de horas"
+                            placeholder={t.hours.customPlaceholder}
                             className="flex-1 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm focus:border-[#002E7D] focus:outline-none focus:ring-2 focus:ring-[#002E7D]/20"
                           />
                           <motion.button
@@ -447,13 +483,13 @@ export default function Quoter() {
                             whileTap={{ scale: 0.97 }}
                             transition={TAP}
                             className="flex items-center justify-center rounded-xl bg-gradient-to-r from-[#FCD116] to-[#f5b700] px-4 text-slate-900"
-                            aria-label="Continuar"
+                            aria-label={t.hours.continueAria}
                           >
                             <ArrowRight size={18} />
                           </motion.button>
                         </div>
                       )}
-                      <BackLink onClick={goBack} />
+                      <BackLink label={t.back} onClick={goBack} />
                     </div>
                   )}
 
@@ -462,20 +498,20 @@ export default function Quoter() {
                       <div className="flex gap-2">
                         <OptionCard
                           icon={SprayCan}
-                          label="Sí, llevadlos"
+                          label={t.products.yes}
                           badge={`+${PRODUCTS_FEE}€`}
                           selected={answers.products === true}
                           onClick={() => { setAnswers((a) => ({ ...a, products: true })); goNext(); }}
                         />
                         <OptionCard
                           icon={Ban}
-                          label="No hace falta"
-                          sub="ya tengo"
+                          label={t.products.no}
+                          sub={t.products.noSub}
                           selected={answers.products === false}
                           onClick={() => { setAnswers((a) => ({ ...a, products: false })); goNext(); }}
                         />
                       </div>
-                      <BackLink onClick={goBack} />
+                      <BackLink label={t.back} onClick={goBack} />
                     </div>
                   )}
 
@@ -502,26 +538,26 @@ export default function Quoter() {
                           </motion.button>
                         ))}
                       </div>
-                      <BackLink onClick={goBack} />
+                      <BackLink label={t.back} onClick={goBack} />
                     </div>
                   )}
 
                   {step === 'extras' && (
                     <div className="space-y-3">
                       <div className="grid grid-cols-2 gap-2">
-                        {EXTRAS.map((extra) => (
+                        {EXTRA_KEYS.map((key) => (
                           <OptionCard
-                            key={extra.key}
+                            key={key}
                             icon={Sparkles}
-                            label={extra.label}
-                            badge={`+${extra.price}€`}
-                            selected={answers.extras.includes(extra.key)}
-                            onClick={() => toggleExtra(extra.key)}
+                            label={t.extras[key]}
+                            badge={`+${EXTRA_PRICES[key]}€`}
+                            selected={answers.extras.includes(key)}
+                            onClick={() => toggleExtra(key)}
                           />
                         ))}
                       </div>
                       <div className="flex items-center justify-between">
-                        <BackLink onClick={goBack} />
+                        <BackLink label={t.back} onClick={goBack} />
                         <motion.button
                           type="button"
                           onClick={goNext}
@@ -530,7 +566,7 @@ export default function Quoter() {
                           transition={TAP}
                           className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#FCD116] to-[#f5b700] px-5 py-2 text-sm font-semibold text-slate-900"
                         >
-                          {answers.extras.length ? 'Continuar' : 'Saltar'}
+                          {answers.extras.length ? t.extras.continueBtn : t.extras.skipBtn}
                           <ArrowRight size={15} />
                         </motion.button>
                       </div>
@@ -549,37 +585,37 @@ export default function Quoter() {
                         >
                           {formatEUR(quote.total)} <span className="text-lg font-semibold text-slate-500">€</span>
                         </motion.p>
-                        <p className="mt-1 text-sm text-slate-500">Total con IGI · {answers.hours}h por visita</p>
+                        <p className="mt-1 text-sm text-slate-500">{t.summary.totalWithIgi} · {answers.hours}{t.summary.perVisitUnit}</p>
                       </div>
 
                       <p className="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700">
-                        Precio orientativo · se confirma en el lugar
+                        {t.summary.approxPrice}
                       </p>
 
                       <details className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
-                        <summary className="cursor-pointer font-semibold text-slate-700">Ver desglose</summary>
+                        <summary className="cursor-pointer font-semibold text-slate-700">{t.summary.viewBreakdown}</summary>
                         <div className="mt-3 space-y-1.5 border-t border-slate-200 pt-3">
                           <div className="flex justify-between"><span>{formatEUR(quote.rate)}€ × {answers.hours}h</span><span className="tabular-nums">{formatEUR(quote.base)}€</span></div>
-                          {quote.productsFee > 0 && <div className="flex justify-between"><span>Productos de limpieza</span><span className="tabular-nums">+{formatEUR(quote.productsFee)}€</span></div>}
-                          <div className="flex justify-between"><span>Desplazamiento · {answers.location}</span><span className="tabular-nums">+{formatEUR(quote.travelFee)}€</span></div>
-                          {quote.extrasTotal > 0 && <div className="flex justify-between"><span>Extras · {extrasLabel}</span><span className="tabular-nums">+{formatEUR(quote.extrasTotal)}€</span></div>}
-                          <div className="flex justify-between border-t border-slate-200 pt-1.5 font-semibold text-slate-800"><span>Subtotal por visita</span><span className="tabular-nums">{formatEUR(quote.subtotal)}€</span></div>
-                          {quote.discount > 0 && <div className="flex justify-between text-emerald-600"><span>Descuento recurrente (10%)</span><span className="tabular-nums">-{formatEUR(quote.discount)}€</span></div>}
-                          <div className="flex justify-between"><span>IGI (4.5%)</span><span className="tabular-nums">+{formatEUR(quote.igi)}€</span></div>
-                          <div className="flex justify-between border-t border-slate-200 pt-1.5 font-bold text-slate-900"><span>TOTAL por visita</span><span className="tabular-nums">{formatEUR(quote.total)}€</span></div>
+                          {quote.productsFee > 0 && <div className="flex justify-between"><span>{t.summary.productsLine}</span><span className="tabular-nums">+{formatEUR(quote.productsFee)}€</span></div>}
+                          <div className="flex justify-between"><span>{t.summary.travelLine} · {answers.location}</span><span className="tabular-nums">+{formatEUR(quote.travelFee)}€</span></div>
+                          {quote.extrasTotal > 0 && <div className="flex justify-between"><span>{t.summary.extrasLine} · {extrasLabel}</span><span className="tabular-nums">+{formatEUR(quote.extrasTotal)}€</span></div>}
+                          <div className="flex justify-between border-t border-slate-100 pt-1.5 font-semibold text-slate-800"><span>{t.summary.subtotal}</span><span className="tabular-nums">{formatEUR(quote.subtotal)}€</span></div>
+                          {quote.discount > 0 && <div className="flex justify-between text-emerald-600"><span>{t.summary.recurringDiscount}</span><span className="tabular-nums">-{formatEUR(quote.discount)}€</span></div>}
+                          <div className="flex justify-between"><span>{t.summary.igi}</span><span className="tabular-nums">+{formatEUR(quote.igi)}€</span></div>
+                          <div className="flex justify-between border-t border-slate-200 pt-1.5 font-bold text-slate-900"><span>{t.summary.total}</span><span className="tabular-nums">{formatEUR(quote.total)}€</span></div>
                         </div>
                       </details>
 
                       <div>
                         <label htmlFor="quoter-name" className="text-xs font-medium text-slate-500">
-                          ¿A nombre de quién? (opcional)
+                          {t.summary.nameLabel}
                         </label>
                         <input
                           id="quoter-name"
                           type="text"
                           value={answers.name}
                           onChange={(e) => setAnswers((a) => ({ ...a, name: e.target.value }))}
-                          placeholder="Tu nombre"
+                          placeholder={t.summary.namePlaceholder}
                           className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm focus:border-[#002E7D] focus:outline-none focus:ring-2 focus:ring-[#002E7D]/20"
                         />
                       </div>
@@ -593,19 +629,19 @@ export default function Quoter() {
                         transition={TAP}
                         className="flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#FCD116] to-[#f5b700] px-5 py-3 text-sm font-semibold text-slate-900 shadow-[0_14px_30px_rgba(252,209,22,0.35)]"
                       >
-                        Enviar por WhatsApp
+                        {t.summary.sendWhatsapp}
                         <ArrowRight size={16} />
                       </motion.a>
 
                       <div className="flex items-center justify-between">
-                        <BackLink onClick={goBack} />
+                        <BackLink label={t.back} onClick={goBack} />
                         <button
                           type="button"
                           onClick={resetAll}
                           className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-400 transition-colors hover:text-slate-600"
                         >
                           <RotateCcw size={13} />
-                          Empezar de nuevo
+                          {t.summary.restart}
                         </button>
                       </div>
                     </div>

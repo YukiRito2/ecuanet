@@ -1,14 +1,20 @@
 import { motion } from 'framer-motion';
 import { ClipboardList, Lightbulb, Rocket, TrendingUp } from 'lucide-react';
 
-const steps = [
-  { icon: ClipboardList, title: 'Diagnóstico', description: 'Revisamos tu espacio y definimos necesidades reales.' },
-  { icon: Lightbulb, title: 'Propuesta', description: 'Creamos un plan con tiempos, equipos y alcance exacto.' },
-  { icon: Rocket, title: 'Arranque', description: 'Iniciamos la limpieza con protocolos y coordinación.' },
-  { icon: TrendingUp, title: 'Optimización', description: 'Ajustamos resultados para mejorar continuidad y experiencia.' },
-] as const;
+interface ProcessProps {
+  lang: 'es' | 'ca' | 'fr';
+  t: {
+    title: string;
+    subtitle: string;
+    steps: readonly { title: string; description: string }[];
+  };
+}
 
-export default function Process() {
+const icons = [ClipboardList, Lightbulb, Rocket, TrendingUp];
+
+export default function Process({ t }: ProcessProps) {
+  const steps = t.steps.map((step, i) => ({ ...step, icon: icons[i] }));
+
   return (
     <section id="process" className="bg-white py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -19,10 +25,10 @@ export default function Process() {
           className="mb-16 text-center"
         >
           <h2 className="text-4xl font-black tracking-[-0.06em] text-slate-900 md:text-5xl">
-            Cómo trabajamos
+            {t.title}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-600">
-            Un proceso claro, seguro y eficiente en cuatro pasos
+            {t.subtitle}
           </p>
         </motion.div>
 

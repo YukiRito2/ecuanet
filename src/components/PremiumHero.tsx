@@ -35,6 +35,11 @@ export default function PremiumHero({ t }: PremiumHeroProps) {
   return (
     <section id="home" className="relative overflow-hidden bg-[#f4f7fb] pt-28 pb-20">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(252,209,22,0.18),transparent_24%),radial-gradient(circle_at_bottom_right,_rgba(0,46,125,0.12),transparent_30%)]" />
+      <div className="pointer-events-none absolute inset-x-0 top-16 flex justify-center lg:hidden" aria-hidden="true">
+        <span className="select-none whitespace-nowrap text-[5.5rem] font-black leading-none tracking-tight text-[#002E7D]/[0.07]">
+          ECUANET
+        </span>
+      </div>
       <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:px-8">
         <motion.div variants={container} initial="hidden" animate="show" className="space-y-7">
           <motion.div
@@ -106,7 +111,7 @@ export default function PremiumHero({ t }: PremiumHeroProps) {
           initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
-          className="relative"
+          className="relative hidden lg:block"
         >
           <div className="absolute -left-4 top-10 h-32 w-32 rounded-full bg-yellow-300/40 blur-3xl" />
           <div className="absolute -right-2 bottom-8 h-36 w-36 rounded-full bg-blue-500/25 blur-3xl" />

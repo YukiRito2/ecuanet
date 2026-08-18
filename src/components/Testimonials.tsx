@@ -1,28 +1,16 @@
 import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
 
-const testimonials = [
-  {
-    name: 'Juan Rodríguez',
-    company: 'Hotel Andorra',
-    text: 'Muy profesionales y con un trato impecable. Nuestro edificio siempre luce perfecto.',
-    rating: 5,
-  },
-  {
-    name: 'María García',
-    company: 'Consultora A',
-    text: 'La limpieza de nuestras oficinas cambió por completo la experiencia de clientes y equipos.',
-    rating: 5,
-  },
-  {
-    name: 'Carlos Moreno',
-    company: 'Centro Comercial',
-    text: 'Cumplieron perfectamente con tiempos, estándares y atención del equipo.',
-    rating: 5,
-  },
-] as const;
+interface TestimonialsProps {
+  lang: 'es' | 'ca' | 'fr';
+  t: {
+    title: string;
+    subtitle: string;
+    items: readonly { name: string; company: string; text: string }[];
+  };
+}
 
-export default function Testimonials() {
+export default function Testimonials({ t }: TestimonialsProps) {
   return (
     <section className="bg-slate-50 py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -33,15 +21,15 @@ export default function Testimonials() {
           className="mb-16 text-center"
         >
           <h2 className="text-4xl font-black tracking-[-0.06em] text-slate-900 md:text-5xl">
-            Qué dicen nuestros clientes
+            {t.title}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-600">
-            Resultados reales y experiencias de confianza
+            {t.subtitle}
           </p>
         </motion.div>
 
         <div className="grid gap-6 md:grid-cols-3">
-          {testimonials.map((item, i) => (
+          {t.items.map((item, i) => (
             <motion.div
               key={item.name}
               initial={{ opacity: 0, y: 20 }}
@@ -52,7 +40,7 @@ export default function Testimonials() {
               className="rounded-[1.8rem] border border-slate-200 bg-white p-8 shadow-[0_18px_50px_rgba(15,23,42,0.04)]"
             >
               <div className="mb-4 flex gap-1">
-                {Array.from({ length: item.rating }).map((_, idx) => (
+                {Array.from({ length: 5 }).map((_, idx) => (
                   <Star key={idx} size={16} className="fill-[#FCD116] text-[#FCD116]" />
                 ))}
               </div>
