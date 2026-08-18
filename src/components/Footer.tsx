@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Mail, Music2, Phone } from 'lucide-react';
 import logo from '../assets/ecuanet-logo.png';
 import { scrollToSection } from '../utils/scrollToSection';
@@ -25,7 +26,7 @@ const socials = [
   { label: 'Email', href: 'mailto:contacto@ecuanet.com', icon: Mail },
 ] as const;
 
-const companyAnchorIds = ['home', 'process', 'contact'];
+const companyAnchorIds = ['home', 'trabajos', 'process', 'contact'];
 
 export default function Footer({ t }: FooterProps) {
   return (
@@ -44,7 +45,7 @@ export default function Footer({ t }: FooterProps) {
             <h3 className="mb-4 text-lg font-bold">{t.servicesTitle}</h3>
             <ul className="space-y-2 text-sm text-slate-400">
               {t.serviceLinks.map((label) => (
-                <li key={label}><a href="#services" onClick={scrollToSection('services')} className="transition-colors hover:text-[#FCD116]">{label}</a></li>
+                <li key={label}><a href="/#services" onClick={scrollToSection('services')} className="transition-colors hover:text-[#FCD116]">{label}</a></li>
               ))}
             </ul>
           </motion.div>
@@ -52,9 +53,17 @@ export default function Footer({ t }: FooterProps) {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.16 }}>
             <h3 className="mb-4 text-lg font-bold">{t.companyTitle}</h3>
             <ul className="space-y-2 text-sm text-slate-400">
-              {t.companyLinks.map((label, i) => (
-                <li key={label}><a href={`#${companyAnchorIds[i]}`} onClick={scrollToSection(companyAnchorIds[i])} className="transition-colors hover:text-[#FCD116]">{label}</a></li>
-              ))}
+              {t.companyLinks.map((label, i) => {
+                const id = companyAnchorIds[i];
+                if (id === 'trabajos') {
+                  return (
+                    <li key={label}><Link to="/trabajos" className="transition-colors hover:text-[#FCD116]">{label}</Link></li>
+                  );
+                }
+                return (
+                  <li key={label}><a href={`/#${id}`} onClick={scrollToSection(id)} className="transition-colors hover:text-[#FCD116]">{label}</a></li>
+                );
+              })}
             </ul>
           </motion.div>
 

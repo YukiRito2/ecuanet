@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import PremiumHero from './components/PremiumHero';
 import PremiumServices from './components/PremiumServices';
@@ -10,19 +11,20 @@ import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Quoter from './components/Quoter';
 import Footer from './components/Footer';
+import TrabajosPage from './components/TrabajosPage';
 import { translations, type Lang } from './translations';
 
-export default function App() {
-  const [lang, setLang] = useState<Lang>('es');
-  const [quoterOpen, setQuoterOpen] = useState(false);
-  const t = translations[lang];
-  const openQuoter = () => setQuoterOpen(true);
+interface HomePageProps {
+  lang: Lang;
+  t: (typeof translations)[Lang];
+  onOpenQuoter: () => void;
+}
 
+function HomePage({ lang, t, onOpenQuoter }: HomePageProps) {
   return (
-    <main className="bg-white text-slate-900">
-      <Navbar lang={lang} setLang={setLang} t={t.nav} />
+    <>
       <div className="bg-white">
-        <PremiumHero lang={lang} t={t.hero} onOpenQuoter={openQuoter} />
+        <PremiumHero lang={lang} t={t.hero} onOpenQuoter={onOpenQuoter} />
       </div>
       <div className="border-t border-slate-100 bg-white">
         <PremiumServices lang={lang} t={t.services} />
@@ -34,7 +36,7 @@ export default function App() {
         <ResultsSection lang={lang} t={t.results} />
       </div>
       <div className="border-t border-slate-100 bg-gradient-to-b from-slate-50 to-white">
-        <PriceValue lang={lang} onOpenQuoter={openQuoter} />
+        <PriceValue lang={lang} onOpenQuoter={onOpenQuoter} />
       </div>
       <div className="border-t border-slate-100 bg-slate-50">
         <Process lang={lang} t={t.process} />
@@ -45,8 +47,27 @@ export default function App() {
       <div className="border-t border-slate-100 bg-white">
         <Contact lang={lang} t={t.contact} />
       </div>
-      <Quoter lang={lang} t={t.quoter} isOpen={quoterOpen} setIsOpen={setQuoterOpen} />
-      <Footer lang={lang} t={t.footer} />
-    </main>
+    </>
+  );
+}
+
+export default function App() {
+  const [lang, setLang] = useState<Lang>('es');
+  const [quoterOpen, setQuoterOpen] = useState(false);
+  const t = translations[lang];
+  const openQuoter = () => setQuoterOpen(true);
+
+  return (
+    <BrowserRouter>
+      <main className="bg-white text-slate-900">
+        <Navbar lang={lang} setLang={setLang} t={t.nav} />
+        <Routes>
+          <Route path="/" element={<HomePage lang={lang} t={t} onOpenQuoter={openQuoter} />} />
+          <Route path="/trabajos" element={<TrabajosPage lang={lang} t={t.trabajosPage} onOpenQuoter={openQuoter} />} />
+        </Routes>
+        <Quoter lang={lang} t={t.quoter} isOpen={quoterOpen} setIsOpen={setQuoterOpen} />
+        <Footer lang={lang} t={t.footer} />
+      </main>
+    </BrowserRouter>
   );
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import type { Lang } from '../translations';
 import logo from '../assets/ecuanet-logo.png';
@@ -21,11 +22,11 @@ export default function Navbar({ lang, setLang, t }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
 
-  const navItems = [
-    { name: t.home, id: 'home' },
-    { name: t.services, id: 'services' },
-    { name: t.works, id: 'works' },
-    { name: t.contact, id: 'contact' },
+  const navItems: ({ name: string; kind: 'anchor'; id: string } | { name: string; kind: 'link'; path: string })[] = [
+    { name: t.home, kind: 'anchor', id: 'home' },
+    { name: t.services, kind: 'anchor', id: 'services' },
+    { name: t.works, kind: 'link', path: '/trabajos' },
+    { name: t.contact, kind: 'anchor', id: 'contact' },
   ];
 
   const languages = [
@@ -38,25 +39,33 @@ export default function Navbar({ lang, setLang, t }: NavbarProps) {
     <nav className="fixed top-0 z-50 w-full border-b border-slate-200/80 bg-white/80 backdrop-blur-xl">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <motion.a href="#home" onClick={scrollToSection('home')} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-2">
+          <motion.a href="/#home" onClick={scrollToSection('home')} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-2">
             <img src={logo} alt="Ecuanet" className="h-11 w-11 object-contain" />
             <span className="text-lg font-bold tracking-[-0.02em] text-slate-900">Ecuanet</span>
           </motion.a>
 
           <div className="hidden items-center gap-8 md:flex">
-            {navItems.map((item, i) => (
-              <motion.a
-                key={item.name}
-                href={`#${item.id}`}
-                onClick={scrollToSection(item.id)}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                className="text-sm font-medium text-slate-700 transition-colors hover:text-[#002E7D]"
-              >
-                {item.name}
-              </motion.a>
-            ))}
+            {navItems.map((item, i) =>
+              item.kind === 'link' ? (
+                <motion.div key={item.name} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
+                  <Link to={item.path} className="text-sm font-medium text-slate-700 transition-colors hover:text-[#002E7D]">
+                    {item.name}
+                  </Link>
+                </motion.div>
+              ) : (
+                <motion.a
+                  key={item.name}
+                  href={`/#${item.id}`}
+                  onClick={scrollToSection(item.id)}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="text-sm font-medium text-slate-700 transition-colors hover:text-[#002E7D]"
+                >
+                  {item.name}
+                </motion.a>
+              ),
+            )}
           </div>
 
           <div className="hidden items-center gap-3 md:flex">
@@ -145,19 +154,30 @@ export default function Navbar({ lang, setLang, t }: NavbarProps) {
           className="overflow-hidden border-t md:hidden"
         >
           <div className="space-y-4 px-4 py-4">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={`#${item.id}`}
-                onClick={(event) => {
-                  scrollToSection(item.id)(event);
-                  setIsOpen(false);
-                }}
-                className="block font-medium text-slate-700 hover:text-[#002E7D]"
-              >
-                {item.name}
-              </a>
-            ))}
+            {navItems.map((item) =>
+              item.kind === 'link' ? (
+                <Link
+                  key={item.name}
+                  to={item.path}
+                  onClick={() => setIsOpen(false)}
+                  className="block font-medium text-slate-700 hover:text-[#002E7D]"
+                >
+                  {item.name}
+                </Link>
+              ) : (
+                <a
+                  key={item.name}
+                  href={`/#${item.id}`}
+                  onClick={(event) => {
+                    scrollToSection(item.id)(event);
+                    setIsOpen(false);
+                  }}
+                  className="block font-medium text-slate-700 hover:text-[#002E7D]"
+                >
+                  {item.name}
+                </a>
+              ),
+            )}
             <a
               href="https://wa.me/593999999999"
               target="_blank"

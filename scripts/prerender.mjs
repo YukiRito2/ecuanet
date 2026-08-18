@@ -7,7 +7,7 @@
 // and writes the resulting DOM back into dist/index.html — the JS bundle stays
 // in place, so real browsers still hydrate/re-render normally on load.
 import { createServer } from 'node:http';
-import { readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import puppeteerCore from 'puppeteer-core';
@@ -69,6 +69,13 @@ function startStaticServer() {
   return new Promise((resolve) => server.listen(PORT, '127.0.0.1', () => resolve(server)));
 }
 
+// Every client route that needs its own prerendered snapshot, mapped to
+// where Vercel/static hosting expects to find it as a real file.
+const ROUTES = [
+  { path: '/', output: 'index.html' },
+  { path: '/trabajos', output: 'trabajos/index.html' },
+];
+
 async function main() {
   const server = await startStaticServer();
   const browser = await launchBrowser();
@@ -88,15 +95,19 @@ async function main() {
       }
     });
 
-    await page.goto(`http://127.0.0.1:${PORT}/`, { waitUntil: 'networkidle0', timeout: 60_000 });
-    await page.waitForSelector('h1');
-    // Let entry animations (staggered fade-ins, up to ~0.6s) settle before the snapshot.
-    await new Promise((resolve) => setTimeout(resolve, 800));
+    for (const route of ROUTES) {
+      await page.goto(`http://127.0.0.1:${PORT}${route.path}`, { waitUntil: 'networkidle0', timeout: 60_000 });
+      await page.waitForSelector('h1');
+      // Let entry animations (staggered fade-ins, up to ~0.6s) settle before the snapshot.
+      await new Promise((resolve) => setTimeout(resolve, 800));
 
-    const html = await page.content();
-    const outputPath = fileURLToPath(new URL('index.html', DIST_DIR));
-    await writeFile(outputPath, html);
-    console.log(`Prerendered ${outputPath} (${html.length} bytes)`);
+      const html = await page.content();
+      const outputUrl = new URL(route.output, DIST_DIR);
+      await mkdir(new URL('.', outputUrl), { recursive: true });
+      const outputPath = fileURLToPath(outputUrl);
+      await writeFile(outputPath, html);
+      console.log(`Prerendered ${outputPath} (${html.length} bytes)`);
+    }
   } finally {
     await browser.close();
     await new Promise((resolve) => server.close(resolve));

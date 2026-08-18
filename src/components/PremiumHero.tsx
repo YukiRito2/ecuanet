@@ -150,7 +150,7 @@ export default function PremiumHero({ t, onOpenQuoter }: PremiumHeroProps) {
                 <ArrowRight size={18} />
               </motion.button>
               <motion.a
-                href="#services"
+                href="/#services"
                 onClick={scrollToSection('services')}
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.97 }}

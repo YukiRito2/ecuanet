@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import DotBackground from './DotBackground';
 
 interface PremiumShowcaseProps {
@@ -14,6 +16,7 @@ interface PremiumShowcaseProps {
       comercial: string;
       eventos: string;
     };
+    viewAll: string;
   };
 }
 
@@ -94,6 +97,22 @@ export default function PremiumShowcase({ t }: PremiumShowcaseProps) {
             );
           })}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="mt-10 flex justify-center"
+        >
+          <Link
+            to="/trabajos"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 font-semibold text-slate-800 shadow-sm transition-colors hover:border-[#002E7D]/40 hover:text-[#002E7D]"
+          >
+            {t.viewAll}
+            <ArrowRight size={18} />
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

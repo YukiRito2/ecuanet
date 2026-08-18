@@ -6,5 +6,6 @@
       "destination": "https://ecuanet.es/:path*",
       "permanent": true
     }
-  ]
+  ],
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
