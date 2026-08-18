@@ -1,6 +1,28 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { ArrowRight, Camera, PlayCircle, Sparkles } from 'lucide-react';
 import DotBackground from './DotBackground';
+
+const VIDEO_IDS = ['wnEQU7YlnmY', '315eHWE3FSs', '42Fkpj29JLE'] as const;
+
+function AutoplayShort({ videoId }: { videoId: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-80px' });
+
+  return (
+    <div ref={ref} className="mx-auto aspect-[9/16] w-32 overflow-hidden rounded-2xl border border-slate-200 bg-slate-900 sm:w-36">
+      {isInView && (
+        <iframe
+          className="h-full w-full"
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&playsinline=1&rel=0&modestbranding=1`}
+          title="Video del caso"
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+        />
+      )}
+    </div>
+  );
+}
 
 interface ResultsSectionProps {
   lang: 'es' | 'ca' | 'fr';
@@ -31,7 +53,7 @@ const images = [
 ];
 
 export default function ResultsSection({ t }: ResultsSectionProps) {
-  const cases = t.cases.map((item, i) => ({ ...item, ...images[i] }));
+  const cases = t.cases.map((item, i) => ({ ...item, ...images[i], videoId: VIDEO_IDS[i] }));
 
   return (
     <section id="results" className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50 to-white py-24">
@@ -95,7 +117,11 @@ export default function ResultsSection({ t }: ResultsSectionProps) {
                 </div>
               </div>
 
-              <div className="space-y-4 px-5 pb-6 pt-2">
+              <div className="px-4">
+                <AutoplayShort videoId={item.videoId} />
+              </div>
+
+              <div className="space-y-4 px-5 pb-6 pt-4">
                 <p className="text-lg font-bold text-slate-900">{item.result}</p>
                 <button className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700">
                   {t.btn}
