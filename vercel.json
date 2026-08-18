@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.ecuanet.es" }],
+      "destination": "https://ecuanet.es/:path*",
+      "permanent": true
+    }
+  ]
+}
