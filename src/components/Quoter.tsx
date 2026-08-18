@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import WhatsAppIcon from './WhatsAppIcon';
 import {
   X,
-  Phone,
   Calculator,
   ArrowRight,
   ArrowLeft,
@@ -323,7 +323,7 @@ export default function Quoter({ t, isOpen, setIsOpen }: QuoterProps) {
           className="flex h-16 w-16 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_18px_40px_rgba(37,211,102,0.45)]"
           aria-label="WhatsApp"
         >
-          <Phone size={28} />
+          <WhatsAppIcon size={28} />
         </motion.a>
 
         <AnimatePresence>
