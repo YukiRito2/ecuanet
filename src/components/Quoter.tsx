@@ -35,6 +35,8 @@ interface Answers {
 
 interface QuoterProps {
   lang: 'es' | 'ca' | 'fr';
+  isOpen: boolean;
+  setIsOpen: (value: boolean | ((prev: boolean) => boolean)) => void;
   t: {
     launcherLabel: string;
     launcherAria: string;
@@ -244,8 +246,7 @@ function BackLink({ label, onClick }: { label: string; onClick: () => void }) {
   );
 }
 
-export default function Quoter({ t }: QuoterProps) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function Quoter({ t, isOpen, setIsOpen }: QuoterProps) {
   const [stepIndex, setStepIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [answers, setAnswers] = useState<Answers>(EMPTY_ANSWERS);

@@ -4,6 +4,7 @@ import DotBackground from './DotBackground';
 
 interface PriceValueProps {
   lang: 'es' | 'ca' | 'fr';
+  onOpenQuoter: () => void;
 }
 
 const translations = {
@@ -100,7 +101,7 @@ const iconMap = {
   DollarSign,
 };
 
-export default function PriceValue({ lang }: PriceValueProps) {
+export default function PriceValue({ lang, onOpenQuoter }: PriceValueProps) {
   const t = translations[lang];
 
   return (
@@ -144,17 +145,16 @@ export default function PriceValue({ lang }: PriceValueProps) {
         </div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 }} className="mt-16 flex justify-center">
-          <motion.a
-            href="https://wa.me/593999999999"
-            target="_blank"
-            rel="noreferrer"
+          <motion.button
+            type="button"
+            onClick={onOpenQuoter}
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.98 }}
             className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#FCD116] to-[#f5b700] px-8 py-4 font-bold text-slate-900 shadow-[0_20px_40px_rgba(252,209,22,0.35)] transition-all"
           >
             <DollarSign size={20} />
             {t.cta}
-          </motion.a>
+          </motion.button>
         </motion.div>
       </div>
     </section>
