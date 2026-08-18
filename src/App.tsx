@@ -14,13 +14,14 @@ import { translations, type Lang } from './translations';
 
 export default function App() {
   const [lang, setLang] = useState<Lang>('es');
+  const [quoterOpen, setQuoterOpen] = useState(false);
   const t = translations[lang];
 
   return (
     <main className="bg-white text-slate-900">
       <Navbar lang={lang} setLang={setLang} t={t.nav} />
       <div className="bg-white">
-        <PremiumHero lang={lang} t={t.hero} />
+        <PremiumHero lang={lang} t={t.hero} onOpenQuoter={() => setQuoterOpen(true)} />
       </div>
       <div className="border-t border-slate-100 bg-white">
         <PremiumServices lang={lang} t={t.services} />
@@ -43,7 +44,7 @@ export default function App() {
       <div className="border-t border-slate-100 bg-white">
         <Contact lang={lang} t={t.contact} />
       </div>
-      <Quoter lang={lang} t={t.quoter} />
+      <Quoter lang={lang} t={t.quoter} isOpen={quoterOpen} setIsOpen={setQuoterOpen} />
       <Footer lang={lang} t={t.footer} />
     </main>
   );
