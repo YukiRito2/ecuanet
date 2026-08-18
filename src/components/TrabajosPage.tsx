@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, MapPin } from 'lucide-react';
 import DotBackground from './DotBackground';
 import CompareSlider from './CompareSlider';
+import TikTokIcon from './TikTokIcon';
 
 interface TrabajosPageProps {
   lang: 'es' | 'ca' | 'fr';
@@ -14,6 +15,7 @@ interface TrabajosPageProps {
     before: string;
     after: string;
     cta: string;
+    socialCta: string;
     items: readonly { category: string; location: string; description: string }[];
   };
 }
@@ -48,7 +50,9 @@ export default function TrabajosPage({ onOpenQuoter, t }: TrabajosPageProps) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-6 lg:grid-cols-3">
             {jobs.map((job, index) => {
-              const featured = index % 3 === 0;
+              // Explicit per-index widths so every row of the 3-col grid fills
+              // exactly 3 columns (2+1, 1+2, 1+2) with no leftover gap.
+              const featured = [true, false, false, true, false, true][index];
               return (
                 <motion.article
                   key={`${job.category}-${job.location}`}
@@ -99,6 +103,18 @@ export default function TrabajosPage({ onOpenQuoter, t }: TrabajosPageProps) {
             {t.cta}
             <ArrowRight size={20} />
           </motion.button>
+
+          <motion.a
+            href="https://tiktok.com/@limpieecu"
+            target="_blank"
+            rel="noreferrer"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="mt-2 inline-flex items-center gap-3 rounded-full border border-slate-300 bg-white px-8 py-4 font-bold text-slate-800 shadow-sm transition-colors hover:border-slate-400"
+          >
+            <TikTokIcon size={20} />
+            {t.socialCta}
+          </motion.a>
         </div>
       </section>
     </div>

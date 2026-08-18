@@ -53,6 +53,7 @@ export const translations = {
       after: 'Después',
       backHome: 'Volver al inicio',
       cta: 'Solicita tu presupuesto',
+      socialCta: 'Más contenido en nuestras redes sociales',
       items: [
         { category: 'Oficinas corporativas', location: 'Andorra la Vella', description: 'Limpieza integral de oficinas y salas de reuniones con protocolos de mantenimiento diario. Incluye desinfección de superficies de contacto, vaciado de papeleras y cuidado de zonas comunes como cocina y recepción.' },
         { category: 'Hoteles', location: 'Escaldes-Engordany', description: 'Preparación de habitaciones para una experiencia impecable en cada llegada. Cambio de ropa de cama, reposición de amenities y repaso de baños siguiendo el estándar del hotel.' },
@@ -238,6 +239,7 @@ export const translations = {
       after: 'Després',
       backHome: 'Tornar a l\'inici',
       cta: 'Sol·licita el teu pressupost',
+      socialCta: 'Més contingut a les nostres xarxes socials',
       items: [
         { category: 'Oficines corporatives', location: 'Andorra la Vella', description: 'Neteja integral d\'oficines i sales de reunions amb protocols de manteniment diari. Inclou desinfecció de superfícies de contacte, buidatge de papereres i cura de zones comunes com la cuina i la recepció.' },
         { category: 'Hotels', location: 'Escaldes-Engordany', description: 'Preparació d\'habitacions per a una experiència impecable a cada arribada. Canvi de roba de llit, reposició d\'amenities i repàs dels banys seguint l\'estàndard de l\'hotel.' },
@@ -423,6 +425,7 @@ export const translations = {
       after: 'Après',
       backHome: 'Retour à l\'accueil',
       cta: 'Demandez votre devis',
+      socialCta: 'Plus de contenu sur nos réseaux sociaux',
       items: [
         { category: 'Bureaux d\'entreprise', location: 'Andorra la Vella', description: 'Nettoyage complet des bureaux et salles de réunion avec un entretien quotidien. Désinfection des surfaces de contact, vidage des corbeilles et entretien des espaces communs comme la cuisine et l\'accueil.' },
         { category: 'Hôtels', location: 'Escaldes-Engordany', description: 'Préparation des chambres pour une expérience impeccable à chaque arrivée. Changement du linge de lit, réapprovisionnement des produits d\'accueil et nettoyage des salles de bains selon les standards de l\'hôtel.' },

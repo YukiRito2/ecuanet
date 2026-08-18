@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Mail, Music2, Phone } from 'lucide-react';
+import { Mail, Phone } from 'lucide-react';
 import logo from '../assets/ecuanet-logo.png';
 import { scrollToSection } from '../utils/scrollToSection';
+import TikTokIcon from './TikTokIcon';
 
 interface FooterProps {
   lang: 'es' | 'ca' | 'fr';
@@ -22,7 +23,7 @@ interface FooterProps {
 
 const socials = [
   { label: 'WhatsApp', href: 'https://wa.me/593999999999', icon: Phone },
-  { label: 'TikTok', href: 'https://tiktok.com/@limpieecu', icon: Music2 },
+  { label: 'TikTok', href: 'https://tiktok.com/@limpieecu', icon: TikTokIcon },
   { label: 'Email', href: 'mailto:contacto@ecuanet.com', icon: Mail },
 ] as const;
 
