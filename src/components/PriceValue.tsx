@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
-import { animate, motion, useInView, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { TrendingDown, Award, Zap, DollarSign } from 'lucide-react';
 import DotBackground from './DotBackground';
 
@@ -31,8 +30,7 @@ const translations = {
       {
         icon: 'DollarSign',
         title: 'ROI comprobado',
-        description: 'Nuestros clientes reportan menos reinversión en mantenimiento al año.',
-        value: { number: 40, prefix: '-', suffix: '%' },
+        description: 'Nuestros clientes reportan 40% menos reinversión en mantenimiento al año.',
       },
     ],
     cta: 'Solicita una cotización sin compromiso',
@@ -60,8 +58,7 @@ const translations = {
       {
         icon: 'DollarSign',
         title: 'ROI comprovat',
-        description: 'Els nostres clients reporten menys reinversió en manteniment l\'any.',
-        value: { number: 40, prefix: '-', suffix: '%' },
+        description: 'Els nostres clients reporten 40% menys reinversió en manteniment l\'any.',
       },
     ],
     cta: 'Sol·licita una cotització sense compromís',
@@ -89,8 +86,7 @@ const translations = {
       {
         icon: 'DollarSign',
         title: 'ROI prouvé',
-        description: 'Nos clients signalent moins de réinvestissement en maintenance par an.',
-        value: { number: 40, prefix: '-', suffix: '%' },
+        description: 'Nos clients signalent 40% moins de réinvestissement en maintenance par an.',
       },
     ],
     cta: 'Demandez un devis sans engagement',
@@ -103,31 +99,6 @@ const iconMap = {
   Zap,
   DollarSign,
 };
-
-function Counter({ to, prefix = '', suffix = '' }: { to: number; prefix?: string; suffix?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-80px' });
-  const reduceMotion = useReducedMotion();
-  const [value, setValue] = useState(reduceMotion ? to : 0);
-
-  useEffect(() => {
-    if (!isInView || reduceMotion) return;
-    const controls = animate(0, to, {
-      duration: 1.4,
-      ease: [0.16, 1, 0.3, 1],
-      onUpdate: (v) => setValue(Math.round(v)),
-    });
-    return () => controls.stop();
-  }, [isInView, to, reduceMotion]);
-
-  return (
-    <span ref={ref}>
-      {prefix}
-      {value}
-      {suffix}
-    </span>
-  );
-}
 
 export default function PriceValue({ lang }: PriceValueProps) {
   const t = translations[lang];
@@ -160,19 +131,9 @@ export default function PriceValue({ lang }: PriceValueProps) {
                 <div className="absolute inset-0 bg-gradient-to-br from-yellow-50/0 via-transparent to-blue-50/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
                 <div className="relative space-y-4">
-                  <motion.div
-                    whileHover={{ scale: 1.12, rotate: [0, -8, 8, -4, 0] }}
-                    transition={{ duration: 0.5, ease: 'easeInOut' }}
-                    className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#FCD116] via-[#002E7D] to-[#CE1126] shadow-lg"
-                  >
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#FCD116] via-[#002E7D] to-[#CE1126] shadow-lg">
                     <Icon size={24} className="text-white" />
-                  </motion.div>
-
-                  {benefit.value && (
-                    <p className="text-4xl font-black tracking-tight text-[#002E7D]">
-                      <Counter to={benefit.value.number} prefix={benefit.value.prefix} suffix={benefit.value.suffix} />
-                    </p>
-                  )}
+                  </div>
 
                   <h3 className="text-xl font-bold text-slate-900">{benefit.title}</h3>
                   <p className="leading-6 text-slate-600">{benefit.description}</p>
@@ -189,11 +150,10 @@ export default function PriceValue({ lang }: PriceValueProps) {
             rel="noreferrer"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.98 }}
-            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-gradient-to-r from-[#FCD116] to-[#f5b700] px-8 py-4 font-bold text-slate-900 shadow-[0_20px_40px_rgba(252,209,22,0.35)] transition-all"
+            className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#FCD116] to-[#f5b700] px-8 py-4 font-bold text-slate-900 shadow-[0_20px_40px_rgba(252,209,22,0.35)] transition-all"
           >
-            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/60 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
-            <DollarSign size={20} className="relative" />
-            <span className="relative">{t.cta}</span>
+            <DollarSign size={20} />
+            {t.cta}
           </motion.a>
         </motion.div>
       </div>

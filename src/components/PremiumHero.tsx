@@ -5,7 +5,6 @@ import { scrollToSection } from '../utils/scrollToSection';
 
 interface PremiumHeroProps {
   lang: 'es' | 'ca' | 'fr';
-  onOpenQuoter: () => void;
   t: {
     badge: string;
     title1: string;
@@ -73,7 +72,7 @@ function HeroCopy({ children }: { children: ReactNode }) {
   );
 }
 
-export default function PremiumHero({ t, onOpenQuoter }: PremiumHeroProps) {
+export default function PremiumHero({ t }: PremiumHeroProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: scrollRef });
   const reduceMotion = useReducedMotion();
@@ -138,9 +137,10 @@ export default function PremiumHero({ t, onOpenQuoter }: PremiumHeroProps) {
               transition={{ duration: 0.6, delay: 0.2, ease: EASE }}
               className="mt-7 flex flex-col items-center justify-center gap-4 sm:flex-row"
             >
-              <motion.button
-                type="button"
-                onClick={onOpenQuoter}
+              <motion.a
+                href="https://wa.me/593999999999"
+                target="_blank"
+                rel="noreferrer"
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ duration: 0.16, ease: EASE }}
@@ -148,7 +148,7 @@ export default function PremiumHero({ t, onOpenQuoter }: PremiumHeroProps) {
               >
                 {t.ctaPrimary}
                 <ArrowRight size={18} />
-              </motion.button>
+              </motion.a>
               <motion.a
                 href="#services"
                 onClick={scrollToSection('services')}

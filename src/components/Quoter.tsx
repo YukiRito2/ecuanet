@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import WhatsAppIcon from './WhatsAppIcon';
 import {
   X,
+  Phone,
   Calculator,
   ArrowRight,
   ArrowLeft,
@@ -35,8 +35,6 @@ interface Answers {
 
 interface QuoterProps {
   lang: 'es' | 'ca' | 'fr';
-  isOpen: boolean;
-  setIsOpen: (value: boolean | ((prev: boolean) => boolean)) => void;
   t: {
     launcherLabel: string;
     launcherAria: string;
@@ -246,7 +244,8 @@ function BackLink({ label, onClick }: { label: string; onClick: () => void }) {
   );
 }
 
-export default function Quoter({ t, isOpen, setIsOpen }: QuoterProps) {
+export default function Quoter({ t }: QuoterProps) {
+  const [isOpen, setIsOpen] = useState(false);
   const [stepIndex, setStepIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [answers, setAnswers] = useState<Answers>(EMPTY_ANSWERS);
@@ -323,7 +322,7 @@ export default function Quoter({ t, isOpen, setIsOpen }: QuoterProps) {
           className="flex h-16 w-16 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_18px_40px_rgba(37,211,102,0.45)]"
           aria-label="WhatsApp"
         >
-          <WhatsAppIcon size={28} />
+          <Phone size={28} />
         </motion.a>
 
         <AnimatePresence>
