@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import DotBackground from './DotBackground';
 
 interface PremiumShowcaseProps {
   lang: 'es' | 'ca' | 'fr';
@@ -46,8 +47,9 @@ const gallery = [
 
 export default function PremiumShowcase({ t }: PremiumShowcaseProps) {
   return (
-    <section className="bg-slate-50 py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="relative overflow-hidden bg-slate-50 py-24">
+      <DotBackground />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

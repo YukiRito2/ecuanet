@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { TrendingDown, Award, Zap, DollarSign } from 'lucide-react';
+import DotBackground from './DotBackground';
 
 interface PriceValueProps {
   lang: 'es' | 'ca' | 'fr';
@@ -105,6 +106,7 @@ export default function PriceValue({ lang }: PriceValueProps) {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50 py-24">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(252,209,22,0.08),transparent_40%),radial-gradient(circle_at_bottom_right,_rgba(0,46,125,0.06),transparent_35%)]" />
+      <DotBackground />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-16 text-center">

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import type { Lang } from '../translations';
 import logo from '../assets/ecuanet-logo.png';
+import { scrollToSection } from '../utils/scrollToSection';
 
 interface NavbarProps {
   lang: Lang;
@@ -20,10 +21,10 @@ export default function Navbar({ lang, setLang, t }: NavbarProps) {
   const [languageOpen, setLanguageOpen] = useState(false);
 
   const navItems = [
-    { name: t.home, href: '#home' },
-    { name: t.services, href: '#services' },
-    { name: t.works, href: '#works' },
-    { name: t.contact, href: '#contact' },
+    { name: t.home, id: 'home' },
+    { name: t.services, id: 'services' },
+    { name: t.works, id: 'works' },
+    { name: t.contact, id: 'contact' },
   ];
 
   const languages = [
@@ -36,7 +37,7 @@ export default function Navbar({ lang, setLang, t }: NavbarProps) {
     <nav className="fixed top-0 z-50 w-full border-b border-slate-200/80 bg-white/80 backdrop-blur-xl">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <motion.a href="#home" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-2">
+          <motion.a href="#home" onClick={scrollToSection('home')} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-2">
             <img src={logo} alt="Ecuanet" className="h-11 w-11 object-contain" />
             <span className="text-lg font-bold tracking-[-0.02em] text-slate-900">Ecuanet</span>
           </motion.a>
@@ -45,7 +46,8 @@ export default function Navbar({ lang, setLang, t }: NavbarProps) {
             {navItems.map((item, i) => (
               <motion.a
                 key={item.name}
-                href={item.href}
+                href={`#${item.id}`}
+                onClick={scrollToSection(item.id)}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
@@ -140,7 +142,15 @@ export default function Navbar({ lang, setLang, t }: NavbarProps) {
         >
           <div className="space-y-4 px-4 py-4">
             {navItems.map((item) => (
-              <a key={item.name} href={item.href} onClick={() => setIsOpen(false)} className="block font-medium text-slate-700 hover:text-[#002E7D]">
+              <a
+                key={item.name}
+                href={`#${item.id}`}
+                onClick={(event) => {
+                  scrollToSection(item.id)(event);
+                  setIsOpen(false);
+                }}
+                className="block font-medium text-slate-700 hover:text-[#002E7D]"
+              >
                 {item.name}
               </a>
             ))}

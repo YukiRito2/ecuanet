@@ -1,6 +1,7 @@
 import { createContext, useContext, useRef, useState, type ReactNode } from 'react';
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform, type MotionValue } from 'framer-motion';
 import { ArrowRight, Check, MapPin, ShieldCheck, Sparkles } from 'lucide-react';
+import { scrollToSection } from '../utils/scrollToSection';
 
 interface PremiumHeroProps {
   lang: 'es' | 'ca' | 'fr';
@@ -74,6 +75,7 @@ function HeroCopy({ children }: { children: ReactNode }) {
 export default function PremiumHero({ t }: PremiumHeroProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: scrollRef });
+  const reduceMotion = useReducedMotion();
 
   return (
     <section id="home" className="relative bg-[#f4f7fb]">
@@ -111,9 +113,13 @@ export default function PremiumHero({ t }: PremiumHeroProps) {
               className="mt-5 text-4xl font-black tracking-[-0.06em] text-slate-900 sm:text-5xl lg:text-6xl"
             >
               {t.title1}
-              <span className="block bg-gradient-to-r from-[#FCD116] via-[#002E7D] to-[#CE1126] bg-clip-text text-transparent">
+              <motion.span
+                className="block bg-gradient-to-r from-[#FCD116] via-[#002E7D] to-[#CE1126] bg-clip-text text-transparent [background-size:300%_auto]"
+                animate={reduceMotion ? undefined : { backgroundPosition: ['0% 50%', '300% 50%'] }}
+                transition={reduceMotion ? undefined : { duration: 6, repeat: Infinity, ease: 'linear' }}
+              >
                 {t.title2}
-              </span>
+              </motion.span>
             </motion.h1>
 
             <motion.p
@@ -145,6 +151,7 @@ export default function PremiumHero({ t }: PremiumHeroProps) {
               </motion.a>
               <motion.a
                 href="#services"
+                onClick={scrollToSection('services')}
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ duration: 0.16, ease: EASE }}

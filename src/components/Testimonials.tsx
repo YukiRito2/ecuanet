@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
+import DotBackground from './DotBackground';
 
 interface TestimonialsProps {
   lang: 'es' | 'ca' | 'fr';
@@ -12,8 +13,9 @@ interface TestimonialsProps {
 
 export default function Testimonials({ t }: TestimonialsProps) {
   return (
-    <section className="bg-slate-50 py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="relative overflow-hidden bg-slate-50 py-24">
+      <DotBackground />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

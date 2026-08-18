@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Camera, PlayCircle, Sparkles } from 'lucide-react';
+import DotBackground from './DotBackground';
 
 interface ResultsSectionProps {
   lang: 'es' | 'ca' | 'fr';
@@ -35,6 +36,7 @@ export default function ResultsSection({ t }: ResultsSectionProps) {
   return (
     <section id="results" className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50 to-white py-24">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(0,46,125,0.08),transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(252,209,22,0.10),transparent_30%)]" />
+      <DotBackground />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div

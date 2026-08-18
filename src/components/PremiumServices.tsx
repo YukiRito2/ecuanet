@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Building2, Castle, Home, Sparkles, Truck, Wrench } from 'lucide-react';
+import DotBackground from './DotBackground';
 
 interface PremiumServicesProps {
   lang: 'es' | 'ca' | 'fr';
@@ -24,8 +25,9 @@ export default function PremiumServices({ t }: PremiumServicesProps) {
   const services = t.list.map((service, i) => ({ ...service, icon: icons[i], image: images[i] }));
 
   return (
-    <section id="services" className="bg-white py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="services" className="relative overflow-hidden bg-white py-24">
+      <DotBackground />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

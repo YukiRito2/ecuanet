@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ClipboardList, Lightbulb, Rocket, TrendingUp } from 'lucide-react';
+import DotBackground from './DotBackground';
 
 interface ProcessProps {
   lang: 'es' | 'ca' | 'fr';
@@ -16,8 +17,9 @@ export default function Process({ t }: ProcessProps) {
   const steps = t.steps.map((step, i) => ({ ...step, icon: icons[i] }));
 
   return (
-    <section id="process" className="bg-white py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="process" className="relative overflow-hidden bg-white py-24">
+      <DotBackground />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

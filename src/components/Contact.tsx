@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Phone, MapPin, ArrowRight } from 'lucide-react';
+import DotBackground from './DotBackground';
 
 interface ContactProps {
   lang: 'es' | 'ca' | 'fr';
@@ -21,8 +22,9 @@ interface ContactProps {
 
 export default function Contact({ t }: ContactProps) {
   return (
-    <section id="contact" className="bg-white py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="relative overflow-hidden bg-white py-24">
+      <DotBackground />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-12 md:grid-cols-2">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
