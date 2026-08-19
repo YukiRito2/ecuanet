@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import PremiumHero from './components/PremiumHero';
 import PremiumServices from './components/PremiumServices';
@@ -18,6 +18,16 @@ interface HomePageProps {
   lang: Lang;
   t: (typeof translations)[Lang];
   onOpenQuoter: () => void;
+}
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
 }
 
 function HomePage({ lang, t, onOpenQuoter }: HomePageProps) {
@@ -60,6 +70,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <main className="bg-white text-slate-900">
+        <ScrollToTop />
         <Navbar lang={lang} setLang={setLang} t={t.nav} />
         <Routes>
           <Route path="/" element={<HomePage lang={lang} t={t} onOpenQuoter={openQuoter} />} />
