@@ -1,0 +1,164 @@
+{
+  "project_name": "Ecuanet - Limpieza Premium en Andorra",
+  "app_type": "landing_page",
+  "language": "es",
+  "design_archetype": "ARCHETYPE 5: LUXURY & CORPORATE PRECISION (Swiss & High-Contrast Fusion)",
+  "emotional_tone": "Elegante, sobrio, impecable, altamente profesional, confiable y moderno. Transmite la pureza y rigurosidad del estándar andorrano.",
+  "color_palette": {
+    "primary_dominant": "#002E7D",
+    "primary_deep": "#001B4D",
+    "primary_surface": "#002466",
+    "primary_accent_yellow": "#FCD116",
+    "primary_accent_yellow_hover": "#E5B900",
+    "text_primary": "#FFFFFF",
+    "text_muted": "#A3B8CC",
+    "text_dark": "#0F172A",
+    "bg_light_surface": "#F8FAFC",
+    "border_subtle": "rgba(255, 255, 255, 0.12)",
+    "border_highlight": "rgba(252, 209, 22, 0.3)",
+    "rules": [
+      "El azul marino #002E7D domina más del 80% de la interfaz para establecer confianza y sobriedad corporativa.",
+      "El amarillo #FCD116 se utiliza estrictamente como acento (CTA principal, insignias seleccionadas, acentos de estado y resplandores sutiles), NUNCA como fondo de secciones grandes para evitar el efecto bandera.",
+      "Prohibido usar azul verdoso (#1B93A4) ni morados (#7351B7)."
+    ]
+  },
+  "typography": {
+    "heading_font": "Plus Jakarta Sans / Cabinet Grotesk (sans-serif de alto impacto)",
+    "body_font": "Plus Jakarta Sans / Inter (para máxima legibilidad)",
+    "mono_accent_font": "JetBrains Mono (para datos, métricas y numeración de manifiesto)",
+    "hierarchy": {
+      "h1_hero": "text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08]",
+      "h2_section": "text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight",
+      "h3_card": "text-xl sm:text-2xl font-semibold",
+      "body": "text-base text-slate-300 leading-relaxed",
+      "subtitle": "text-lg sm:text-xl text-slate-300 font-normal leading-relaxed",
+      "badge": "text-xs font-semibold tracking-wider uppercase"
+    }
+  },
+  "layout_and_spacing": {
+    "container_padding": "px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto",
+    "section_spacing": "py-20 lg:py-32",
+    "grid_system": {
+      "hero": "grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center",
+      "bento_features": "grid grid-cols-1 md:grid-cols-3 gap-8",
+      "stats": "grid grid-cols-1 sm:grid-cols-3 gap-8"
+    }
+  },
+  "key_components_and_features": {
+    "hero_section": {
+      "badge": "Limpieza premium en Andorra",
+      "main_title": "Excelencia e Higiene Impecable para Espacios Exclusivos",
+      "subtitle": "Servicio corporativo y residencial de alta gama adaptado a las exigencias de viviendas de lujo, sedes corporativas y residencias en el Principado de Andorra.",
+      "ctas": {
+        "primary": "Solicitar presupuesto",
+        "secondary": "Ver servicios"
+      },
+      "trust_stats": [
+        {"value": "12+", "label": "Años de experiencia", "detail": "Líderes en Andorra"},
+        {"value": "450+", "label": "Clientes activos", "detail": "Hogares y empresas VIP"},
+        {"value": "100%", "label": "Zona de cobertura", "detail": "Las 7 parroquias de Andorra"}
+      ],
+      "kinetic_effects": [
+        "Reveal enmascarado línea por línea al cargar",
+        "Efecto de inclinación 3D/Tilt interactivo en la tarjeta fotográfica del hero",
+        "Resplandor sutil amarillo (#FCD116) con blur-3xl detrás de los elementos principales"
+      ]
+    },
+    "manifesto_chapters": [
+      {"number": "01", "title": "Perfección Suiza & Pirenaica", "description": "Técnicas de precisión alemana adaptadas a la climatología y arquitectura de montaña."},
+      {"number": "02", "title": "Protocolos ECO-Clean Sanitarios", "description": "Productos de alta gama 100% ecológicos, seguros para niños, mascotas y acabados nobles."},
+      {"number": "03", "title": "Discreción & Confidencialidad", "description": "Personal altamente verificado bajo estricto compromiso de privacidad para clientes VIP."}
+    ],
+    "editorial_marquee": {
+      "speed": "slow",
+      "items": [
+        "ECUANET PREMIUM CLEANING",
+        "ANDORRA LA VELLA",
+        "ESCALDES-ENGORDANY",
+        "SANT JULIÀ DE LÒRIA",
+        "ENCAMP",
+        "LA MASSANA",
+        "ORDINO",
+        "CANILLO",
+        "SERVICIOS RESIDENCIALES & CORPORATIVOS DE LUJO"
+      ]
+    },
+    "interactive_budget_calculator": {
+      "title": "Calculadora Interactiva de Presupuesto",
+      "description": "Obtén un estimado inmediato ajustado a tu tipo de inmueble y frecuencia requerida.",
+      "fields": ["Tipo de Propiedad (Residencial, Oficina, Fin de Obra, Chalet de Lujo)", "Superficie en m²", "Frecuencia (Puntual, Semanal, Bisemanal, Mensual)"],
+      "output": "Estimación previa en € con botón directo para formalizar solicitud"
+    },
+    "showcase_and_services": [
+      {
+        "id": "residencial",
+        "title": "Residencial de Lujo & Chalets",
+        "description": "Cuidado exhaustivo de acabados nobles, madera, mampostería y grandes ventanales."
+      },
+      {
+        "id": "corporativo",
+        "title": "Sedes Corporativas & Oficinas",
+        "description": "Mantenimiento discreto fuera de horario laboral para asegurar entornos impecables."
+      },
+      {
+        "id": "cristaleria",
+        "title": "Cristalería & Ventanales de Alta Montaña",
+        "description": "Limpieza especializada de cristales en altura y fachadas panorámicas."
+      },
+      {
+        "id": "findeobra",
+        "title": "Limpieza Técnica Fin de Obra",
+        "description": "Desinfección y eliminación total de micro-polvo tras reformas de alto nivel."
+      }
+    ]
+  },
+  "image_urls": {
+    "hero_spotlight_cleaner": "https://images.pexels.com/photos/6197111/pexels-photo-6197111.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "hero_secondary_window": "https://images.pexels.com/photos/6197124/pexels-photo-6197124.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "luxury_living_room": "https://images.pexels.com/photos/38289184/pexels-photo-38289184.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "luxury_villa_interior": "https://images.pexels.com/photos/37110043/pexels-photo-37110043.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "corporate_office_clean": "https://images.unsplash.com/photo-1757924461488-ef9ad0670978?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzV8MHwxfHNlYXJjaHwzfHxtb2Rlcm4lMjBsdXh1cnklMjB2aWxsYSUyMGludGVyaW9yJTIwbWluaW1hbGlzdCUyMGNsZWFuJTIwYXJjaGl0ZWN0dXJlfGVufDB8fHx8MTc4NzE2MzE4Mnww&ixlib=rb-4.1.0&q=85"
+  },
+  "interactive_motion_and_animations": {
+    "libraries_suggested": [
+      "framer-motion (para revelados, parallax y animaciones de scroll)",
+      "lucide-react (para iconografía limpia)",
+      "canvas-confetti (opcional para confirmación de presupuesto)",
+      "react-fast-marquee (para cinta editorial continua)"
+    ],
+    "hero_animation_spec": {
+      "mask_reveal": "Text elements clip path line reveal with cubic-bezier(0.16, 1, 0.3, 1) timing",
+      "card_parallax": "Mouse tilt effect on the hero frame using frame motion transforms (rotateX, rotateY)",
+      "scroll_trigger": "Header backdrop blur transition from transparent to solid navy on scroll"
+    }
+  },
+  "testing_guidelines": {
+    "data_testid_rules": "Todos los botones, campos de formulario, pestañas de servicio y contadores deben contener data-testid en kebab-case.",
+    "key_testids": [
+      "hero-badge",
+      "hero-title",
+      "hero-primary-cta",
+      "hero-secondary-cta",
+      "trust-stat-years",
+      "trust-stat-clients",
+      "trust-stat-coverage",
+      "navbar-logo",
+      "navbar-contact-button",
+      "budget-calculator-form",
+      "budget-submit-button",
+      "services-tab-residencial",
+      "services-tab-corporativo",
+      "contact-form-name",
+      "contact-form-email",
+      "contact-form-phone",
+      "contact-form-submit"
+    ]
+  },
+  "instructions_to_main_agent": [
+    "1. Implementar la landing page completa en React JS estructurando los componentes en carpetas limpias (Hero, Navbar, Services, Showcase, Results, Pricing, Process, Testimonials, BudgetCalculator, Contact, Footer).",
+    "2. Configurar el tema oscuro/sobrio dominante en azul #002E7D con sombras elevadas y bordes sutiles semi-transparentes.",
+    "3. Asegurar que el botón principal y detalles clave usen #FCD116 de forma equilibrada sin sobrecargar.",
+    "4. Incluir todas las secciones solicitadas con interactividad completa (Calculadora de presupuesto funcional, filtros/pestañas de servicios, acordeón/modal de contacto y animaciones de scroll).",
+    "5. Asegurar cumplimiento de data-testid en todos los elementos interactivos para garantizar que las pruebas automatizadas funcionen sin problemas."
+  ]
+}
