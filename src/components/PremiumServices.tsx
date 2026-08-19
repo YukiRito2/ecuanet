@@ -43,6 +43,9 @@ export default function PremiumServices({ t }: PremiumServicesProps) {
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {services.map((service, index) => {
             const Icon = service.icon;
+            // Industrial and Restauración y detalle are skipped in the mobile
+            // single-column layout to keep the section shorter on small screens.
+            const hiddenOnMobile = index === 3 || index === 4;
             return (
               <motion.article
                 key={service.title}
@@ -51,7 +54,7 @@ export default function PremiumServices({ t }: PremiumServicesProps) {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08 }}
                 whileHover={{ y: -6 }}
-                className="group overflow-hidden rounded-[1.8rem] border border-slate-200 bg-slate-50 shadow-[0_18px_50px_rgba(15,23,42,0.04)]"
+                className={`group overflow-hidden rounded-[1.8rem] border border-slate-200 bg-slate-50 shadow-[0_18px_50px_rgba(15,23,42,0.04)] ${hiddenOnMobile ? 'hidden md:block' : ''}`}
               >
                 <div className="overflow-hidden">
                   <img
