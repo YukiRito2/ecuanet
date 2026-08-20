@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Mail, Phone } from 'lucide-react';
 import logo from '../assets/ecuanet-logo.png';
 import { scrollToSection } from '../utils/scrollToSection';
-import TikTokIcon from './TikTokIcon';
 
 interface FooterProps {
   lang: 'es' | 'ca' | 'fr';
@@ -22,9 +21,8 @@ interface FooterProps {
 }
 
 const socials = [
-  { label: 'WhatsApp', href: 'https://wa.me/593999999999', icon: Phone },
-  { label: 'TikTok', href: 'https://tiktok.com/@limpieecu', icon: TikTokIcon },
-  { label: 'Email', href: 'mailto:contacto@ecuanet.com', icon: Mail },
+  { label: 'WhatsApp', href: 'https://wa.me/376697195', icon: Phone },
+  { label: 'Email', href: 'mailto:ecuanet7@gmail.com', icon: Mail },
 ] as const;
 
 const companyAnchorIds = ['home', 'trabajos', 'process', 'contact'];
@@ -86,7 +84,7 @@ export default function Footer({ t }: FooterProps) {
                 </motion.a>
               ))}
             </div>
-            <p className="text-sm text-slate-400"><span className="font-semibold text-slate-300">WhatsApp:</span> +593 9 9999 9999</p>
+            <p className="text-sm text-slate-400"><span className="font-semibold text-slate-300">WhatsApp:</span> +376 697 195</p>
           </motion.div>
         </div>
 
@@ -95,8 +93,8 @@ export default function Footer({ t }: FooterProps) {
             <p>{t.copyright}</p>
             <div className="flex gap-6">
               <a href="#" className="transition-colors hover:text-[#FCD116]">{t.privacy}</a>
-              <a href="#" className="transition-colors hover:text-[#FCD116]">{t.terms}</a>
-              <a href="#" className="transition-colors hover:text-[#FCD116]">{t.cookies}</a>
+              <Link to="/terminos" className="transition-colors hover:text-[#FCD116]">{t.terms}</Link>
+              <Link to="/cookies" className="transition-colors hover:text-[#FCD116]">{t.cookies}</Link>
             </div>
           </div>
         </div>

@@ -2,8 +2,6 @@ import { motion } from 'framer-motion';
 import { ArrowRight, MapPin } from 'lucide-react';
 import DotBackground from './DotBackground';
 import CompareSlider from './CompareSlider';
-import TikTokIcon from './TikTokIcon';
-import RainbowButton from './RainbowButton';
 
 interface TrabajosPageProps {
   lang: 'es' | 'ca' | 'fr';
@@ -16,7 +14,6 @@ interface TrabajosPageProps {
     before: string;
     after: string;
     cta: string;
-    socialCta: string;
     items: readonly { category: string; location: string; description: string }[];
   };
 }
@@ -104,11 +101,6 @@ export default function TrabajosPage({ onOpenQuoter, t }: TrabajosPageProps) {
             {t.cta}
             <ArrowRight size={20} />
           </motion.button>
-
-          <RainbowButton href="https://tiktok.com/@limpieecu" className="mt-2">
-            <TikTokIcon size={20} />
-            {t.socialCta}
-          </RainbowButton>
         </div>
       </section>
     </div>

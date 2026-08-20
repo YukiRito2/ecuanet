@@ -189,7 +189,7 @@ export default function Testimonials({ t, stat1, stat2 }: TestimonialsProps) {
             </Card>
 
             <motion.a
-              href="https://wa.me/593999999999"
+              href="https://wa.me/376697195"
               target="_blank"
               rel="noreferrer"
               custom={6}

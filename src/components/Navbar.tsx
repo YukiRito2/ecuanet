@@ -119,7 +119,7 @@ export default function Navbar({ lang, setLang, t }: NavbarProps) {
             </div>
 
             <motion.a
-              href="https://wa.me/593999999999"
+              href="https://wa.me/376697195"
               target="_blank"
               rel="noreferrer"
               initial={{ opacity: 0, x: 20 }}
@@ -197,7 +197,7 @@ export default function Navbar({ lang, setLang, t }: NavbarProps) {
               ),
             )}
             <a
-              href="https://wa.me/593999999999"
+              href="https://wa.me/376697195"
               target="_blank"
               rel="noreferrer"
               className="block w-full rounded-full bg-gradient-to-r from-yellow-400 to-yellow-500 px-4 py-2 text-center font-semibold text-gray-900"

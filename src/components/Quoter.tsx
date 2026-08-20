@@ -15,14 +15,12 @@ import {
   SprayCan,
   Ban,
   MapPin,
-  Sparkles,
   Check,
 } from 'lucide-react';
 
 type PropertyType = 'vivienda' | 'empresa';
 type Frequency = 'recurrente' | 'unica';
-type ExtraKey = 'vaporeta' | 'aspirador' | 'planxa' | 'express';
-type StepId = 'property' | 'frequency' | 'hours' | 'products' | 'location' | 'extras' | 'summary';
+type StepId = 'property' | 'frequency' | 'hours' | 'products' | 'location' | 'summary';
 
 interface Answers {
   name: string;
@@ -31,7 +29,6 @@ interface Answers {
   hours: number | null;
   products: boolean | null;
   location: string | null;
-  extras: ExtraKey[];
 }
 
 interface QuoterProps {
@@ -52,15 +49,11 @@ interface QuoterProps {
     frequency: { recurring: string; recurringSub: string; once: string };
     hours: { customButton: string; customPlaceholder: string; continueAria: string };
     products: { yes: string; no: string; noSub: string };
-    extras: Record<ExtraKey, string> & { continueBtn: string; skipBtn: string };
     summary: {
       totalWithIgi: string;
       perVisitUnit: string;
       approxPrice: string;
       viewBreakdown: string;
-      productsLine: string;
-      travelLine: string;
-      extrasLine: string;
       subtotal: string;
       recurringDiscount: string;
       igi: string;
@@ -79,8 +72,6 @@ interface QuoterProps {
       hours: string;
       products: string;
       location: string;
-      extras: string;
-      noExtras: string;
       estimate: string;
       perVisit: string;
     };
@@ -94,33 +85,28 @@ const EMPTY_ANSWERS: Answers = {
   hours: null,
   products: null,
   location: null,
-  extras: [],
 };
 
-const STEPS: StepId[] = ['property', 'frequency', 'hours', 'products', 'location', 'extras', 'summary'];
+const STEPS: StepId[] = ['property', 'frequency', 'hours', 'products', 'location', 'summary'];
 const EASE = [0.23, 1, 0.32, 1] as const;
 const SPRING = { type: 'spring', stiffness: 100, damping: 20 } as const;
 const SPRING_POP = { type: 'spring', stiffness: 380, damping: 22 } as const;
 const TAP = { duration: 0.16, ease: EASE };
 
-// Precios orientativos de ejemplo: ajústalos a las tarifas reales del negocio.
-const HOURLY_RATE: Record<PropertyType, number> = { vivienda: 20, empresa: 25 };
-const PRODUCTS_FEE = 5;
-const TRAVEL_FEE: Record<string, number> = {
-  'Andorra la Vella': 5,
-  'Escaldes-Engordany': 5,
-  Encamp: 8,
-  'La Massana': 10,
-  Ordino: 10,
-  'Sant Julià de Lòria': 10,
-  Canillo: 12,
-  'El Pas de la Casa': 15,
-};
-const LOCATIONS = Object.keys(TRAVEL_FEE);
-const EXTRA_PRICES: Record<ExtraKey, number> = { vaporeta: 25, aspirador: 15, planxa: 18, express: 40 };
-const EXTRA_KEYS: ExtraKey[] = ['vaporeta', 'aspirador', 'planxa', 'express'];
+const HOURLY_RATE: Record<PropertyType, number> = { vivienda: 20, empresa: 20 };
+const LOCATIONS = [
+  'Andorra la Vella',
+  'Escaldes-Engordany',
+  'Encamp',
+  'La Massana',
+  'Ordino',
+  'Sant Julià de Lòria',
+  'Canillo',
+  'El Pas de la Casa',
+];
 const RECURRING_DISCOUNT = 0.1;
 const IGI_RATE = 0.045;
+const MIN_HOURS = 2;
 const HOUR_OPTIONS = [2, 3, 4, 5];
 
 function formatEUR(value: number) {
@@ -133,16 +119,13 @@ function computeQuote(answers: Answers) {
   const hours = answers.hours ?? 0;
   const rate = HOURLY_RATE[property];
   const base = rate * hours;
-  const productsFee = answers.products ? PRODUCTS_FEE : 0;
-  const travelFee = answers.location ? (TRAVEL_FEE[answers.location] ?? 10) : 0;
-  const extrasTotal = answers.extras.reduce((sum, key) => sum + EXTRA_PRICES[key], 0);
-  const subtotal = base + productsFee + travelFee + extrasTotal;
+  const subtotal = base;
   const discount = answers.frequency === 'recurrente' ? subtotal * RECURRING_DISCOUNT : 0;
   const discounted = subtotal - discount;
   const igi = discounted * IGI_RATE;
   const total = discounted + igi;
 
-  return { ready, rate, base, productsFee, travelFee, extrasTotal, subtotal, discount, discounted, igi, total };
+  return { ready, rate, base, subtotal, discount, discounted, igi, total };
 }
 
 function StepRail({ index }: { index: number }) {
@@ -173,7 +156,7 @@ function PriceTicker({ value, ready, unit, hint }: { value: number; ready: boole
         transition={SPRING_POP}
         className="text-xl font-black tabular-nums text-slate-900"
       >
-        {formatEUR(value)} €
+        ~{formatEUR(value)} €
       </motion.span>
       <span className="text-xs font-medium text-slate-400">{unit}</span>
     </span>
@@ -279,23 +262,13 @@ export default function Quoter({ t, isOpen, setIsOpen }: QuoterProps) {
   const propertyLabel = answers.property === 'empresa' ? t.property.business : t.property.home;
   const frequencyLabel = answers.frequency === 'recurrente' ? t.frequency.recurring : t.frequency.once;
   const productsLabel = answers.products ? t.products.yes : `${t.products.no}, ${t.products.noSub}`;
-  const extrasLabel = answers.extras.length
-    ? answers.extras.map((k) => t.extras[k]).join(', ')
-    : t.whatsappMessage.noExtras;
 
   const submitCustomHours = () => {
     const n = Number(customHours);
-    if (!n || n <= 0) return;
+    if (!n || n < MIN_HOURS) return;
     setAnswers((a) => ({ ...a, hours: n }));
     setShowCustomHours(false);
     goNext();
-  };
-
-  const toggleExtra = (key: ExtraKey) => {
-    setAnswers((a) => ({
-      ...a,
-      extras: a.extras.includes(key) ? a.extras.filter((k) => k !== key) : [...a.extras, key],
-    }));
   };
 
   const whatsappMessage = encodeURIComponent(
@@ -307,7 +280,6 @@ export default function Quoter({ t, isOpen, setIsOpen }: QuoterProps) {
       `- ${t.whatsappMessage.hours}: ${answers.hours}h`,
       `- ${t.whatsappMessage.products}: ${productsLabel}`,
       `- ${t.whatsappMessage.location}: ${answers.location}`,
-      `- ${t.whatsappMessage.extras}: ${extrasLabel}`,
       `${t.whatsappMessage.estimate} ${formatEUR(quote.total)} ${t.whatsappMessage.perVisit}`,
     ].join('\n'),
   );
@@ -316,7 +288,7 @@ export default function Quoter({ t, isOpen, setIsOpen }: QuoterProps) {
     <>
       <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
         <motion.a
-          href="https://wa.me/593999999999"
+          href="https://wa.me/376697195"
           target="_blank"
           rel="noreferrer"
           whileHover={{ scale: 1.06 }}
@@ -469,7 +441,7 @@ export default function Quoter({ t, isOpen, setIsOpen }: QuoterProps) {
                           <input
                             autoFocus
                             type="number"
-                            min={1}
+                            min={MIN_HOURS}
                             value={customHours}
                             onChange={(e) => setCustomHours(e.target.value)}
                             onKeyDown={(e) => e.key === 'Enter' && submitCustomHours()}
@@ -499,7 +471,6 @@ export default function Quoter({ t, isOpen, setIsOpen }: QuoterProps) {
                         <OptionCard
                           icon={SprayCan}
                           label={t.products.yes}
-                          badge={`+${PRODUCTS_FEE}€`}
                           selected={answers.products === true}
                           onClick={() => { setAnswers((a) => ({ ...a, products: true })); goNext(); }}
                         />
@@ -526,50 +497,16 @@ export default function Quoter({ t, isOpen, setIsOpen }: QuoterProps) {
                             whileTap={{ scale: 0.97 }}
                             transition={TAP}
                             onClick={() => { setAnswers((a) => ({ ...a, location: loc })); goNext(); }}
-                            className={`flex items-center justify-between gap-1.5 rounded-2xl border px-3 py-2.5 text-left text-xs font-medium transition-colors ${
+                            className={`flex items-center gap-1.5 rounded-2xl border px-3 py-2.5 text-left text-xs font-medium transition-colors ${
                               answers.location === loc ? 'border-[#002E7D] bg-blue-50 text-[#002E7D]' : 'border-slate-200 bg-white text-slate-700 hover:border-[#002E7D]/40 hover:bg-blue-50/30'
                             }`}
                           >
-                            <span className="flex items-center gap-1.5">
-                              <MapPin size={13} className="shrink-0 text-[#CE1126]" />
-                              {loc}
-                            </span>
-                            <span className="shrink-0 text-[10px] tabular-nums text-slate-400">+{TRAVEL_FEE[loc]}€</span>
+                            <MapPin size={13} className="shrink-0 text-[#CE1126]" />
+                            {loc}
                           </motion.button>
                         ))}
                       </div>
                       <BackLink label={t.back} onClick={goBack} />
-                    </div>
-                  )}
-
-                  {step === 'extras' && (
-                    <div className="space-y-3">
-                      <div className="grid grid-cols-2 gap-2">
-                        {EXTRA_KEYS.map((key) => (
-                          <OptionCard
-                            key={key}
-                            icon={Sparkles}
-                            label={t.extras[key]}
-                            badge={`+${EXTRA_PRICES[key]}€`}
-                            selected={answers.extras.includes(key)}
-                            onClick={() => toggleExtra(key)}
-                          />
-                        ))}
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <BackLink label={t.back} onClick={goBack} />
-                        <motion.button
-                          type="button"
-                          onClick={goNext}
-                          whileHover={{ y: -1 }}
-                          whileTap={{ scale: 0.97 }}
-                          transition={TAP}
-                          className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#FCD116] to-[#f5b700] px-5 py-2 text-sm font-semibold text-slate-900"
-                        >
-                          {answers.extras.length ? t.extras.continueBtn : t.extras.skipBtn}
-                          <ArrowRight size={15} />
-                        </motion.button>
-                      </div>
                     </div>
                   )}
 
@@ -583,22 +520,19 @@ export default function Quoter({ t, isOpen, setIsOpen }: QuoterProps) {
                           transition={SPRING_POP}
                           className="text-4xl font-black tracking-[-0.03em] tabular-nums text-slate-900"
                         >
-                          {formatEUR(quote.total)} <span className="text-lg font-semibold text-slate-500">€</span>
+                          ~{formatEUR(quote.total)} <span className="text-lg font-semibold text-slate-500">€</span>
                         </motion.p>
                         <p className="mt-1 text-sm text-slate-500">{t.summary.totalWithIgi} · {answers.hours}{t.summary.perVisitUnit}</p>
                       </div>
 
-                      <p className="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700">
+                      <p className="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-700">
                         {t.summary.approxPrice}
                       </p>
 
-                      <details className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
+                      <details open className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
                         <summary className="cursor-pointer font-semibold text-slate-700">{t.summary.viewBreakdown}</summary>
                         <div className="mt-3 space-y-1.5 border-t border-slate-200 pt-3">
                           <div className="flex justify-between"><span>{formatEUR(quote.rate)}€ × {answers.hours}h</span><span className="tabular-nums">{formatEUR(quote.base)}€</span></div>
-                          {quote.productsFee > 0 && <div className="flex justify-between"><span>{t.summary.productsLine}</span><span className="tabular-nums">+{formatEUR(quote.productsFee)}€</span></div>}
-                          <div className="flex justify-between"><span>{t.summary.travelLine} · {answers.location}</span><span className="tabular-nums">+{formatEUR(quote.travelFee)}€</span></div>
-                          {quote.extrasTotal > 0 && <div className="flex justify-between"><span>{t.summary.extrasLine} · {extrasLabel}</span><span className="tabular-nums">+{formatEUR(quote.extrasTotal)}€</span></div>}
                           <div className="flex justify-between border-t border-slate-100 pt-1.5 font-semibold text-slate-800"><span>{t.summary.subtotal}</span><span className="tabular-nums">{formatEUR(quote.subtotal)}€</span></div>
                           {quote.discount > 0 && <div className="flex justify-between text-emerald-600"><span>{t.summary.recurringDiscount}</span><span className="tabular-nums">-{formatEUR(quote.discount)}€</span></div>}
                           <div className="flex justify-between"><span>{t.summary.igi}</span><span className="tabular-nums">+{formatEUR(quote.igi)}€</span></div>
@@ -621,7 +555,7 @@ export default function Quoter({ t, isOpen, setIsOpen }: QuoterProps) {
                       </div>
 
                       <motion.a
-                        href={`https://wa.me/593999999999?text=${whatsappMessage}`}
+                        href={`https://wa.me/376697195?text=${whatsappMessage}`}
                         target="_blank"
                         rel="noreferrer"
                         whileHover={{ y: -1 }}

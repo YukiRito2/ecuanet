@@ -39,7 +39,7 @@ export default function Contact({ t }: ContactProps) {
 
             <div className="space-y-4">
               <motion.a
-                href="https://wa.me/593999999999"
+                href="https://wa.me/376697195"
                 target="_blank"
                 rel="noreferrer"
                 whileHover={{ x: 4 }}
@@ -84,7 +84,7 @@ export default function Contact({ t }: ContactProps) {
               </ul>
 
               <motion.a
-                href="https://wa.me/593999999999"
+                href="https://wa.me/376697195"
                 target="_blank"
                 rel="noreferrer"
                 whileHover={{ scale: 1.02, y: -2 }}

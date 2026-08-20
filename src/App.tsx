@@ -12,6 +12,7 @@ import Contact from './components/Contact';
 import Quoter from './components/Quoter';
 import Footer from './components/Footer';
 import TrabajosPage from './components/TrabajosPage';
+import LegalPage from './components/LegalPage';
 import { translations, type Lang } from './translations';
 
 interface HomePageProps {
@@ -75,6 +76,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage lang={lang} t={t} onOpenQuoter={openQuoter} />} />
           <Route path="/trabajos" element={<TrabajosPage lang={lang} t={t.trabajosPage} onOpenQuoter={openQuoter} />} />
+          <Route path="/terminos" element={<LegalPage title={t.legal.terms.title} updated={t.legal.terms.updated} backHome={t.legal.backHome} sections={t.legal.terms.sections} />} />
+          <Route path="/cookies" element={<LegalPage title={t.legal.cookies.title} updated={t.legal.cookies.updated} backHome={t.legal.backHome} sections={t.legal.cookies.sections} />} />
         </Routes>
         <Quoter lang={lang} t={t.quoter} isOpen={quoterOpen} setIsOpen={setQuoterOpen} />
         <Footer lang={lang} t={t.footer} />

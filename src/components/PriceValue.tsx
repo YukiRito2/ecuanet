@@ -28,11 +28,6 @@ const translations = {
         title: 'Eficiencia garantizada',
         description: 'Equipos capacitados que hacen el trabajo en tiempo récord sin comprometer calidad.',
       },
-      {
-        icon: 'DollarSign',
-        title: 'ROI comprobado',
-        description: 'Nuestros clientes reportan 40% menos reinversión en mantenimiento al año.',
-      },
     ],
     cta: 'Solicita una cotización sin compromiso',
   },
@@ -55,11 +50,6 @@ const translations = {
         icon: 'Zap',
         title: 'Eficiència garantida',
         description: 'Equips capacitats que fan la feina en temps rècord sense comprometre qualitat.',
-      },
-      {
-        icon: 'DollarSign',
-        title: 'ROI comprovat',
-        description: 'Els nostres clients reporten 40% menys reinversió en manteniment l\'any.',
       },
     ],
     cta: 'Sol·licita una cotització sense compromís',
@@ -84,11 +74,6 @@ const translations = {
         title: 'Efficacité garantie',
         description: 'Équipes qualifiées qui font le travail en temps record sans compromettre la qualité.',
       },
-      {
-        icon: 'DollarSign',
-        title: 'ROI prouvé',
-        description: 'Nos clients signalent 40% moins de réinvestissement en maintenance par an.',
-      },
     ],
     cta: 'Demandez un devis sans engagement',
   },
@@ -98,7 +83,6 @@ const iconMap = {
   TrendingDown,
   Award,
   Zap,
-  DollarSign,
 };
 
 export default function PriceValue({ lang, onOpenQuoter }: PriceValueProps) {
@@ -116,7 +100,7 @@ export default function PriceValue({ lang, onOpenQuoter }: PriceValueProps) {
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600">{t.subtitle}</p>
         </motion.div>
 
-        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-8 md:grid-cols-3">
           {t.benefits.map((benefit, index) => {
             const Icon = iconMap[benefit.icon as keyof typeof iconMap];
             return (

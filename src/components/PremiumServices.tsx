@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Building2, Castle, Home, Sparkles, Truck, Wrench } from 'lucide-react';
+import { AppWindow, ArrowUpDown, Briefcase, Building, Construction, Factory, Sparkles, Store, Wrench } from 'lucide-react';
 import DotBackground from './DotBackground';
 
 interface PremiumServicesProps {
@@ -11,14 +11,19 @@ interface PremiumServicesProps {
   };
 }
 
-const icons = [Building2, Home, Castle, Truck, Sparkles, Wrench];
+// Order matches translations.ts services.list: Industrial, Restauración, Mantenimiento,
+// Cristales, Oficinas, Comercio, Despacho, Escaleras, Final de obra.
+const icons = [Factory, Sparkles, Wrench, AppWindow, Building, Store, Briefcase, ArrowUpDown, Construction];
 const images = [
+  'https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=900&q=80',
+  'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=900&q=80',
+  'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80',
+  'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=900&q=80',
   'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80',
   'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80',
-  'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=900&q=80',
-  'https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=900&q=80',
-  'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80',
-  'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=900&q=80',
+  'https://images.unsplash.com/photo-1497366412874-3415097a27e7?auto=format&fit=crop&w=900&q=80',
+  'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=900&q=80',
+  'https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=900&q=80',
 ];
 
 export default function PremiumServices({ t }: PremiumServicesProps) {
@@ -43,9 +48,6 @@ export default function PremiumServices({ t }: PremiumServicesProps) {
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {services.map((service, index) => {
             const Icon = service.icon;
-            // Industrial and Restauración y detalle are skipped in the mobile
-            // single-column layout to keep the section shorter on small screens.
-            const hiddenOnMobile = index === 3 || index === 4;
             return (
               <motion.article
                 key={service.title}
@@ -54,7 +56,7 @@ export default function PremiumServices({ t }: PremiumServicesProps) {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08 }}
                 whileHover={{ y: -6 }}
-                className={`group overflow-hidden rounded-[1.8rem] border border-slate-200 bg-slate-50 shadow-[0_18px_50px_rgba(15,23,42,0.04)] ${hiddenOnMobile ? 'hidden md:block' : ''}`}
+                className="group overflow-hidden rounded-[1.8rem] border border-slate-200 bg-slate-50 shadow-[0_18px_50px_rgba(15,23,42,0.04)]"
               >
                 <div className="overflow-hidden">
                   <img
