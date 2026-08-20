@@ -28,19 +28,19 @@ export default function Showcase() {
   const yB = useTransform(scrollYProgress, [0, 1], [56, -54]);
 
   return (
-    <section id="showcase" ref={ref} data-testid="showcase-section" className="relative overflow-hidden bg-navy-deep py-20 lg:py-32">
-      <div className="absolute left-[10%] top-24 h-[380px] w-[380px] rounded-full bg-gold/10 blur-[130px]" />
+    <section id="showcase" ref={ref} data-testid="showcase-section" className="relative overflow-hidden bg-white py-20 lg:py-32">
+      <div className="absolute left-[10%] top-24 h-[380px] w-[380px] rounded-full bg-gold/20 blur-[130px]" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         <div className="max-w-3xl">
           <FadeIn>
-            <Kicker>Showcase</Kicker>
+            <Kicker light>Showcase</Kicker>
           </FadeIn>
-          <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
+          <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-navy-deep sm:text-4xl lg:text-5xl">
             <MaskedLines
               lines={[
                 <>El estándar Ecuanet,</>,
                 <>
-                  en <span className="font-serif font-medium italic text-gold">cada detalle</span>.
+                  en <span className="font-serif font-medium italic text-navy">cada detalle</span>.
                 </>,
               ]}
             />
@@ -49,7 +49,7 @@ export default function Showcase() {
 
         <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <motion.div style={{ y: yMain }} className="overflow-hidden rounded-3xl border border-white/10">
+            <motion.div style={{ y: yMain }} className="overflow-hidden rounded-3xl border border-slate-200 shadow-[0_25px_70px_-35px_rgba(0,27,77,0.35)]">
               <div className="relative">
                 <img
                   src={FRAMES[0].src}
@@ -66,7 +66,7 @@ export default function Showcase() {
             </motion.div>
           </div>
           <div className="flex flex-col gap-6 lg:col-span-5">
-            <motion.div style={{ y: yA }} className="overflow-hidden rounded-3xl border border-white/10">
+            <motion.div style={{ y: yA }} className="overflow-hidden rounded-3xl border border-slate-200 shadow-[0_25px_70px_-35px_rgba(0,27,77,0.35)]">
               <div className="relative">
                 <img
                   src={FRAMES[1].src}
@@ -81,7 +81,7 @@ export default function Showcase() {
                 </div>
               </div>
             </motion.div>
-            <motion.div style={{ y: yB }} className="overflow-hidden rounded-3xl border border-white/10">
+            <motion.div style={{ y: yB }} className="overflow-hidden rounded-3xl border border-slate-200 shadow-[0_25px_70px_-35px_rgba(0,27,77,0.35)]">
               <div className="relative">
                 <img
                   src={FRAMES[2].src}

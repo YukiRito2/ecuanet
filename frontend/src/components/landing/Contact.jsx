@@ -60,25 +60,25 @@ export default function Contact() {
   };
 
   return (
-    <section id="contacto" data-testid="contact-section" className="relative overflow-hidden bg-navy-deep py-20 lg:py-32">
-      <div className="absolute -left-24 bottom-0 h-[420px] w-[420px] rounded-full bg-gold/10 blur-[140px]" />
+    <section id="contacto" data-testid="contact-section" className="relative overflow-hidden bg-white py-20 lg:py-32">
+      <div className="absolute -left-24 bottom-0 h-[420px] w-[420px] rounded-full bg-gold/20 blur-[140px]" />
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-14 px-4 sm:px-6 lg:grid-cols-2 lg:gap-20 lg:px-12">
         <div>
           <FadeIn>
-            <Kicker>Contacto</Kicker>
+            <Kicker light>Contacto</Kicker>
           </FadeIn>
-          <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
+          <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-navy-deep sm:text-4xl lg:text-5xl">
             <MaskedLines
               lines={[
                 <>Solicita tu</>,
                 <>
-                  <span className="font-serif font-medium italic text-gold">presupuesto</span> hoy.
+                  <span className="font-serif font-medium italic text-navy">presupuesto</span> hoy.
                 </>,
               ]}
             />
           </h2>
           <FadeIn delay={0.2}>
-            <p className="mt-6 max-w-md text-base leading-relaxed text-[#A3B8CC]">
+            <p className="mt-6 max-w-md text-base leading-relaxed text-slate-500">
               Cuéntanos qué necesitas y recibirás una propuesta a medida tras la visita
               técnica gratuita. Sin compromiso.
             </p>
@@ -87,12 +87,12 @@ export default function Contact() {
             {INFO.map((item, i) => (
               <FadeIn key={item.testid} delay={0.25 + i * 0.08}>
                 <div data-testid={item.testid} className="flex items-center gap-4">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/5">
-                    <item.icon size={17} className="text-gold" />
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white shadow-sm">
+                    <item.icon size={17} className="text-navy" />
                   </span>
                   <div>
-                    <p className="text-sm font-semibold text-white">{item.label}</p>
-                    <p className="text-xs text-[#A3B8CC]">{item.sub}</p>
+                    <p className="text-sm font-semibold text-navy-deep">{item.label}</p>
+                    <p className="text-xs text-slate-400">{item.sub}</p>
                   </div>
                 </div>
               </FadeIn>
@@ -104,7 +104,7 @@ export default function Contact() {
           <form
             data-testid="budget-calculator-form"
             onSubmit={submit}
-            className="rounded-3xl border border-white/10 bg-navy-surface/50 p-7 backdrop-blur-sm sm:p-9"
+            className="rounded-3xl border border-navy-deep bg-navy-deep p-7 shadow-[0_50px_110px_-45px_rgba(0,27,77,0.55)] sm:p-9"
           >
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div className="sm:col-span-1">

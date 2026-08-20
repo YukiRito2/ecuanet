@@ -24,19 +24,19 @@ const TESTIMONIALS = [
 
 export default function Testimonials() {
   return (
-    <section id="testimonios" data-testid="testimonials-section" className="relative overflow-hidden bg-navy-deep py-20 lg:py-32">
-      <div className="absolute right-[8%] top-16 h-[360px] w-[360px] rounded-full bg-gold/10 blur-[130px]" />
+    <section id="testimonios" data-testid="testimonials-section" className="relative overflow-hidden bg-[#F8FAFC] py-20 lg:py-32">
+      <div className="absolute right-[8%] top-16 h-[360px] w-[360px] rounded-full bg-gold/20 blur-[130px]" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         <div className="max-w-3xl">
           <FadeIn>
-            <Kicker>Testimonios</Kicker>
+            <Kicker light>Testimonios</Kicker>
           </FadeIn>
-          <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
+          <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-navy-deep sm:text-4xl lg:text-5xl">
             <MaskedLines
               lines={[
                 <>Quien confía,</>,
                 <>
-                  <span className="font-serif font-medium italic text-gold">repite</span>.
+                  <span className="font-serif font-medium italic text-navy">repite</span>.
                 </>,
               ]}
             />
@@ -48,20 +48,20 @@ export default function Testimonials() {
             <FadeIn key={t.name} delay={i * 0.12} className="h-full">
               <figure
                 data-testid={`testimonial-card-${i}`}
-                className="flex h-full flex-col rounded-3xl border border-white/10 bg-navy-surface/40 p-8 transition-[border-color,transform] duration-500 hover:-translate-y-1.5 hover:border-gold/40"
+                className="flex h-full flex-col rounded-3xl border border-slate-200 bg-white p-8 shadow-[0_12px_40px_-25px_rgba(0,27,77,0.18)] transition-[border-color,transform,box-shadow] duration-500 hover:-translate-y-1.5 hover:border-navy/30"
               >
-                <Quote size={26} className="text-gold/60" />
+                <Quote size={26} className="text-gold-dark/60" />
                 <div className="mt-5 flex items-center gap-1">
                   {[...Array(5)].map((_, s) => (
-                    <Star key={s} size={13} className="fill-gold text-gold" />
+                    <Star key={s} size={13} className="fill-gold-dark text-gold-dark" />
                   ))}
                 </div>
-                <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-white/85">
+                <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-slate-600">
                   “{t.quote}”
                 </blockquote>
-                <figcaption className="mt-7 border-t border-white/10 pt-5">
-                  <p className="text-sm font-semibold text-white">{t.name}</p>
-                  <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.2em] text-[#A3B8CC]">{t.role}</p>
+                <figcaption className="mt-7 border-t border-slate-200 pt-5">
+                  <p className="text-sm font-semibold text-navy-deep">{t.name}</p>
+                  <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.2em] text-slate-400">{t.role}</p>
                 </figcaption>
               </figure>
             </FadeIn>

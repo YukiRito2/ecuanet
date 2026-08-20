@@ -33,7 +33,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="App bg-navy-deep font-sans text-white">
+    <div className="App bg-white font-sans text-slate-900">
       <Toaster position="top-center" richColors />
       <Navbar />
       <main>

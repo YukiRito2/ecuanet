@@ -1,5 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
-import { FadeIn, Kicker, MaskedLines } from "./shared";
+import { FadeIn, Kicker, MaskedLines, TiltCard } from "./shared";
 import { scrollToId } from "@/lib/scroll";
 
 const SERVICES = [
@@ -39,18 +39,18 @@ const SERVICES = [
 
 export default function Services() {
   return (
-    <section id="servicios" data-testid="services-section" className="relative bg-navy-deep py-20 lg:py-32">
+    <section id="servicios" data-testid="services-section" className="relative bg-[#F8FAFC] py-20 lg:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
             <FadeIn>
-              <Kicker>Servicios</Kicker>
+              <Kicker light>Servicios</Kicker>
             </FadeIn>
-            <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
+            <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-navy-deep sm:text-4xl lg:text-5xl">
               <MaskedLines
                 lines={[
                   <>Limpieza de alto nivel,</>,
-                  <span className="font-serif font-medium italic text-gold">a medida</span>,
+                  <span className="font-serif font-medium italic text-navy">a medida</span>,
                   <>de cada espacio.</>,
                 ]}
               />
@@ -58,7 +58,7 @@ export default function Services() {
           </div>
           <div className="lg:col-span-5">
             <FadeIn delay={0.2}>
-              <p className="text-base leading-relaxed text-[#A3B8CC]">
+              <p className="text-base leading-relaxed text-slate-500">
                 Cuatro especialidades, un mismo estándar: el suizo. Cada servicio se
                 planifica tras una visita técnica y se ejecuta con protocolos ECO-Clean
                 certificados.
@@ -70,9 +70,9 @@ export default function Services() {
         <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2">
           {SERVICES.map((s, i) => (
             <FadeIn key={s.id} delay={i * 0.1}>
-              <article
+              <TiltCard
                 data-testid={`services-card-${s.id}`}
-                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-navy-surface/40 transition-[border-color,transform] duration-500 hover:-translate-y-1.5 hover:border-gold/40"
+                className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-[0_12px_45px_-25px_rgba(0,27,77,0.2)] transition-[border-color,box-shadow] duration-500 hover:border-navy/40 hover:shadow-[0_30px_70px_-30px_rgba(0,27,77,0.35)]"
               >
                 <div className="relative h-56 overflow-hidden sm:h-64">
                   <img
@@ -87,18 +87,18 @@ export default function Services() {
                   </span>
                 </div>
                 <div className="p-7">
-                  <h3 className="text-xl font-semibold text-white sm:text-2xl">{s.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-[#A3B8CC]">{s.description}</p>
+                  <h3 className="text-xl font-semibold text-navy-deep sm:text-2xl">{s.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-500">{s.description}</p>
                   <button
                     data-testid={`services-cta-${s.id}`}
                     onClick={() => scrollToId("contacto")}
-                    className="mt-6 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-gold transition-colors duration-300 hover:text-gold-dark"
+                    className="mt-6 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-navy transition-colors duration-300 hover:text-gold-dark"
                   >
                     Pedir este servicio
                     <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                   </button>
                 </div>
-              </article>
+              </TiltCard>
             </FadeIn>
           ))}
         </div>

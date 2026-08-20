@@ -33,18 +33,18 @@ const STEPS = [
 
 export default function Process() {
   return (
-    <section id="proceso" data-testid="process-section" className="relative bg-navy-deep py-20 lg:py-32">
+    <section id="proceso" data-testid="process-section" className="relative bg-white py-20 lg:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         <div className="max-w-3xl">
           <FadeIn>
-            <Kicker>Proceso</Kicker>
+            <Kicker light>Proceso</Kicker>
           </FadeIn>
-          <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
+          <h2 className="mt-6 text-3xl font-extrabold tracking-tight text-navy-deep sm:text-4xl lg:text-5xl">
             <MaskedLines
               lines={[
                 <>Un método,</>,
                 <>
-                  cuatro <span className="font-serif font-medium italic text-gold">compromisos</span>.
+                  cuatro <span className="font-serif font-medium italic text-navy">compromisos</span>.
                 </>,
               ]}
             />
@@ -56,19 +56,19 @@ export default function Process() {
             <FadeIn key={s.number} delay={i * 0.08}>
               <div
                 data-testid={`process-step-${s.number}`}
-                className="group grid grid-cols-1 gap-4 border-t border-white/10 py-10 transition-colors duration-500 last:border-b hover:bg-white/[0.02] sm:grid-cols-12 sm:items-center sm:gap-8"
+                className="group grid grid-cols-1 gap-4 border-t border-slate-200 py-10 transition-colors duration-500 last:border-b hover:bg-navy/[0.03] sm:grid-cols-12 sm:items-center sm:gap-8"
               >
                 <div className="sm:col-span-3">
-                  <span className="font-mono text-6xl font-bold tracking-tight text-white/15 transition-colors duration-500 group-hover:text-gold sm:text-7xl">
+                  <span className="font-mono text-6xl font-bold tracking-tight text-navy/10 transition-colors duration-500 group-hover:text-gold-dark sm:text-7xl">
                     {s.number}
                   </span>
                 </div>
                 <div className="sm:col-span-6">
-                  <h3 className="text-xl font-semibold text-white sm:text-2xl">{s.title}</h3>
-                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#A3B8CC]">{s.description}</p>
+                  <h3 className="text-xl font-semibold text-navy-deep sm:text-2xl">{s.title}</h3>
+                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-slate-500">{s.description}</p>
                 </div>
                 <div className="sm:col-span-3 sm:text-right">
-                  <span className="inline-block rounded-full border border-white/15 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.25em] text-white/60 transition-colors duration-500 group-hover:border-gold/40 group-hover:text-gold">
+                  <span className="inline-block rounded-full border border-slate-200 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500 transition-colors duration-500 group-hover:border-gold-dark/50 group-hover:text-gold-dark">
                     {s.tag}
                   </span>
                 </div>

@@ -31,6 +31,12 @@ Rediseñar la sección Hero (PremiumHero, id="home") de la landing de Ecuanet, e
 - Contacto: formulario con calculadora de estimación en vivo + POST a `/api/quotes` + toast de confirmación (verificado E2E: solicitud guardada en MongoDB).
 - Fix técnico: `whileInView` no dispara con React 19 + framer-motion 11 → hook `useInView` + animate controlado en `shared.jsx`.
 
+## Iteración 2 (2026-08-19) — Rebalanceo de color + más 3D
+- Petición: "mucho azul; los colores deben transmitir confianza y profesionalidad" + más efecto 3D.
+- Tema reequilibrado a claro: hero en azul hielo (#F4F8FD), secciones blancas/#F8FAFC; navy solo en banda de Resultados, tarjeta Premium de precios, tarjeta de formulario y footer. Tipografía navy-deep, italic serif en azul #002E7D, dorado solo en CTAs/detalles.
+- 3D reforzado: cluster del hero con parallax de profundidad por capas al mover el ratón (tarjeta principal con tilt + rotación por scroll, foto secundaria y chip con deriva lateral y flotación idle), resplandores que siguen al cursor, anillo de texto giratorio "Ecuanet · Limpieza Premium · Andorra".
+- Tarjetas de Servicios con TiltCard (tilt 3D + brillo dorado que sigue al ratón) vía `shared.jsx`.
+
 ## Backlog priorizado
 - P0: nada pendiente.
 - P1: Panel admin para ver solicitudes de presupuesto (GET /api/quotes ya existe).
